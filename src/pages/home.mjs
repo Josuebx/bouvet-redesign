@@ -1,0 +1,131 @@
+import { ic, img, head, postCard, projectCard, row, aiNet, WAVES, SCRIBBLE, RING, newsletterBand } from '../parts.mjs';
+import { SERVICES, PROJECTS, POSTS, EVENTS, COURSES } from '../data.mjs';
+
+const CLIENTS = ['Cappelen Damm', 'Sikt', 'Miljødirektoratet', 'BW Offshore', 'NATO JWC', 'Sokkeldirektoratet', 'Statens vegvesen', 'UDI', 'Stavanger kommune'];
+
+export default {
+  slug: 'home', file: 'index',
+  title: 'Bouvet – Vi går foran og bygger fremtidens samfunn',
+  desc: 'Bouvet er et ledende norsk konsulentselskap innen IT, rådgivning, design og kommunikasjon.',
+  body: `
+<section class="hero">
+  <div class="wrap hero__grid">
+    <div class="hero__panel">
+      <img class="hero__deco" src="/assets/bouvet-o-light.svg" alt="" aria-hidden="true">
+      <span class="eyebrow">IT · Rådgivning · Design · Kommunikasjon</span>
+      <h1 class="display" style="margin-top:1.25rem" data-split>Vi går foran og bygger <span class="hl">fremtidens</span> samfunn</h1>
+      <p class="lead rv" style="--i:3">Bouvet er et ledende norsk konsulentselskap. Sammen med kundene våre skaper vi digitale løsninger med stor betydning for samfunnet.</p>
+      <div class="hero__actions rv" style="--i:4">
+        <button class="btn" data-modal="m-contact" data-magnetic>La oss snakke ${ic('arrow-right')}</button>
+        <a class="link link--accent" href="#prosjekter">Se prosjektene våre ${ic('arrow-right')}</a>
+      </div>
+    </div>
+    <div class="hero__media">
+      <div class="hero__img">${img('kurs-samtale', 'Bouvet-konsulenter i samtale', 'fetchpriority="high" loading="eager"')}</div>
+      ${WAVES('hero__waves')}
+      ${RING()}
+      <div class="hero__badge"><span class="dot">${ic('trend')}</span><div><strong>Notert på Oslo Børs</strong><span><i class="pulse" style="margin-right:.4rem"></i>Ticker BOUV</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="logos"><div class="wrap">
+  <p class="logos__label">Vi skaper løsninger sammen med blant andre</p>
+  <div class="marquee"><div class="marquee__track">
+    ${[...CLIENTS, ...CLIENTS].map(c => `<span class="marquee__item">${ic('spark')}${c}</span>`).join('')}
+  </div></div>
+</div></section>
+
+<section class="section section--alt" id="tjenester"><div class="wrap">
+  ${head('Vi jobber med', 'Ni fagområder. <span class="hl">Ett</span> tverrfaglig team.', 'Vi setter sammen mennesker, verktøy og metoder i team som skaper helhetlige løsninger og resultater.', `<button class="btn rv" data-modal="m-contact">La oss snakke ${ic('arrow-right')}</button>`)}
+  <div class="grid g-3 svc-grid" data-stagger>
+    ${SERVICES.map((s, i) => `<a class="card svc${i === 0 ? ' is-featured' : ''}" href="/vi-jobber-med#${s.id}"><span class="num">0${i + 1}</span><span class="card__icon">${ic(s.icon)}</span><h3 class="h4">${s.title}</h3><p>${s.desc}</p><span class="card__more">Les mer ${ic('arrow-right')}</span></a>`).join('')}
+  </div>
+</div></section>
+
+<section class="section"><div class="wrap split">
+  <div class="stack-lg">
+    <span class="eyebrow rv">Kunstig intelligens</span>
+    <h2 class="h2" data-split>AI – fra strategi til løsninger som <span class="hl">virker</span></h2>
+    <p class="lead rv">Vi hjelper deg å bruke data smartere. Med solid erfaring fra AI-prosjekter over hele Norge utvikler vi løsninger som fungerer i praksis.</p>
+    <ul class="checks" data-stagger>
+      <li><span class="ic-box">${ic('data')}</span>Avdekke mønstre i dataene dine</li>
+      <li><span class="ic-box">${ic('code')}</span>Bygge smartere applikasjoner</li>
+      <li><span class="ic-box">${ic('loop')}</span>Automatisere prosesser</li>
+      <li><span class="ic-box">${ic('security')}</span>Trygt, etisk og i tråd med regelverk</li>
+    </ul>
+    <div class="rv"><a class="btn btn--dark" href="/vi-jobber-med#ai">Se hvordan vi skaper verdi med AI ${ic('arrow-right')}</a></div>
+  </div>
+  ${aiNet()}
+</div></section>
+
+<section class="section section--alt"><div class="wrap split">
+  <div class="photo-wrap rv-scale">
+    <div class="photo">${img('office-people', 'Kollegaer i Bouvet-huset i Oslo')}</div>
+    ${SCRIBBLE()}
+  </div>
+  <div class="stack-lg">
+    <span class="eyebrow rv">Om Bouvet</span>
+    <h2 class="h2" data-split>Fag på tvers, nærhet til kunder og kunnskap</h2>
+    <p class="lead rv">Stadig flere oppdrag krever en tverrfaglig tilnærming. Med kontorer over hele landet forstår vi kundens språk, kultur og forretning – og løser de fleste oppdrag lokalt.</p>
+    <ul class="checks" data-stagger>
+      <li><span class="ic-box">${ic('pin')}</span>17 kontorer i Norge og Sverige</li>
+      <li><span class="ic-box">${ic('team')}</span>Tverrfaglige team som skaper helhet</li>
+      <li><span class="ic-box">${ic('heart')}</span>Verdidrevet i over 20 år</li>
+      <li><span class="ic-box">${ic('trend')}</span>Børsnotert på Euronext Oslo Børs</li>
+    </ul>
+    <div class="rv"><a class="btn" href="/om-bouvet">Mer om oss ${ic('arrow-right')}</a></div>
+  </div>
+</div></section>
+
+<section class="section section--tight"><div class="wrap">
+  <div class="stats rv">
+    <div class="stat"><b data-count="17">0</b><span>kontorer i Norge og Sverige</span></div>
+    <div class="stat"><b data-count="9">0</b><span>kompetanseområder</span></div>
+    <div class="stat"><b><span data-count="865.4">0</span><small>MNOK</small></b><span>driftsinntekter i 3. kvartal 2026</span></div>
+    <div class="stat"><b data-count="20" data-pre="&gt; " data-suf=" år">0</b><span>som verdidrevet konsulentselskap</span></div>
+  </div>
+</div></section>
+
+<section class="section" id="prosjekter" style="padding-top:0"><div class="wrap" data-hscroll>
+  ${head('Våre prosjekter', 'Løsninger med stor betydning for samfunnet', '', `<div class="scroll-ctrl rv"><button class="icon-btn" data-dir="-1" aria-label="Forrige">${ic('arrow-left')}</button><button class="icon-btn" data-dir="1" aria-label="Neste">${ic('arrow-right')}</button></div>`)}
+  <div class="hscroll" data-stagger>${PROJECTS.map(projectCard).join('')}</div>
+  <div class="progress"><span></span></div>
+  <div style="margin-top:2rem"><a class="link" href="https://www.bouvet.no/prosjekter">Se flere prosjekter ${ic('arrow-right')}</a></div>
+</div></section>
+
+<section class="section section--dark"><div class="wrap">
+  ${head('Aktuelt nå', 'Digital <span class="hl">suverenitet</span>', 'Det handler ikke bare om hvor dataene ligger – men om hvor mye virksomheten kan bestemme selv når pris, vilkår eller rammebetingelser endrer seg.', `<a class="btn btn--ghost rv" href="/bouvet-deler">Alt fra Bouvet deler ${ic('arrow-right')}</a>`)}
+  <div class="grid g-3" data-stagger>${[POSTS[0], POSTS[1], POSTS[5]].map(p => postCard(p)).join('')}</div>
+</div></section>
+
+<section class="section"><div class="wrap">
+  ${head('Bouvet deler', 'Kunnskap og historier fra folkene våre', '', `<a class="link rv" href="/bouvet-deler">Besøk bloggen vår ${ic('arrow-right')}</a>`)}
+  <div class="grid g-3" data-stagger>${[POSTS[2], POSTS[3], POSTS[4]].map(p => postCard(p)).join('')}</div>
+</div></section>
+
+<section class="section section--alt"><div class="wrap">
+  ${head('Kommende frokostseminarer', 'Få en god morgen med Bouvet', 'God frokost, god kaffe og en faglig oppkvikker. Klikk for å melde deg på.', `<a class="link rv" href="/kurs#kommende">Alle kurs og seminarer ${ic('arrow-right')}</a>`)}
+  <div class="rows" data-stagger>${EVENTS.map(e => row(e)).join('')}</div>
+</div></section>
+
+<section class="section"><div class="wrap grid g-2">
+  <a class="mcard rv" href="/bli-en-av-oss">
+    <div class="mcard__img" style="aspect-ratio:16/10">${img('workshop', 'Workshop i Bouvet')}<span class="mcard__go">${ic('arrow-up-right')}</span></div>
+    <span class="eyebrow">Bli en av oss</span>
+    <h3 class="h3">Vi jobber sammen, vi leverer sammen, og vi lykkes sammen.</h3>
+    <p>Vi håper du vil lykkes – sammen med oss. Se våre ledige stillinger.</p>
+  </a>
+  <div class="rv" style="--i:1">
+    <a class="mcard" href="/kurs">
+      <div class="mcard__img" style="aspect-ratio:16/10">${img('kurs-deltagere', 'Kursdeltagere i Bouvet')}<span class="mcard__go">${ic('arrow-up-right')}</span></div>
+      <span class="eyebrow">Lyst til å lære noe nytt?</span>
+      <h3 class="h3">Bli faglig oppdatert av instruktører med lang praktisk erfaring.</h3>
+    </a>
+    <ul style="margin-top:1rem">${COURSES.map(c => `<li><a class="link" href="#" data-modal="m-event" data-title="${c.t}" data-meta="${c.day}. ${c.mon} · ${c.place}" style="padding:.35rem 0">${ic('calendar')} ${c.day}. ${c.mon} – ${c.t}, ${c.place}</a></li>`).join('')}</ul>
+  </div>
+</div></section>
+
+${newsletterBand()}
+`,
+};

@@ -53,11 +53,11 @@ ${phero({
   </div>
 </div></section>
 
-<div style="position:sticky;top:76px;z-index:20;background:rgba(252,248,243,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-block:1px solid var(--line);margin-top:var(--section)">
-  <div class="wrap" style="overflow-x:auto;scrollbar-width:none"><div class="chips" style="flex-wrap:nowrap;padding-block:.75rem">
+<nav class="subnav" aria-label="Kompetanseområder">
+  <div class="subnav__glass"><div class="subnav__track">
     ${SERVICES.map(s => `<a class="chip" href="#${s.id}">${ic(s.icon)}${s.title.split(' og ')[0].split(',')[0]}</a>`).join('')}
   </div></div>
-</div>
+</nav>
 
 ${SERVICES.map(area).join('')}
 

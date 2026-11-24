@@ -13,7 +13,6 @@
   const onScroll = () => {
     const y = scrollY;
     header?.classList.toggle('is-scrolled', y > 10);
-    header?.classList.toggle('is-hidden', y > 400 && y > lastY && !document.body.classList.contains('modal-open'));
     lastY = y;
     const h = document.documentElement.scrollHeight - innerHeight;
     if (bar) bar.style.transform = `scaleX(${h > 0 ? y / h : 0})`;
@@ -266,6 +265,19 @@
     el.addEventListener('mouseenter', () => on(true)); el.addEventListener('mouseleave', () => on(false));
     el.addEventListener('focus', () => on(true)); el.addEventListener('blur', () => on(false));
   });
+
+  /* ---------- sticky sub-nav: active chip follows scroll */
+  const sub = $('.subnav');
+  if (sub) {
+    const chips = $$('.chip', sub);
+    const spy2 = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      chips.forEach(c => { const on = c.hash === '#' + e.target.id; c.setAttribute('aria-current', on ? 'true' : 'false'); if (on) c.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' }); });
+    }), { rootMargin: '-45% 0px -50% 0px' });
+    chips.forEach(c => { const t = document.querySelector(c.hash); if (t) spy2.observe(t); });
+    const io2 = new IntersectionObserver(([e]) => sub.classList.toggle('is-stuck', e.intersectionRatio < 1), { threshold: [1], rootMargin: '-85px 0px 0px 0px' });
+    io2.observe(sub);
+  }
 
   /* ---------- design-system scrollspy */
   const dsLinks = $$('.ds-nav a');

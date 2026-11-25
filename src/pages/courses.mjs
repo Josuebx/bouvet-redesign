@@ -1,4 +1,4 @@
-import { ic, img, head, row, phero, newsletterBand } from '../parts.mjs';
+import { ic, img, head, phero, bleed, eventRow, plainCard, reach, glyphAt, newsletter, PLUS, ARR, pad } from '../parts.mjs';
 import { COURSES, EVENTS, PACKAGES } from '../data.mjs';
 
 const K = 'https://www.bouvet.no';
@@ -18,64 +18,47 @@ export default {
   body: `
 ${phero({
   crumb: 'Kurs', eyebrow: 'Bouvet Kurs',
-  title: 'Vi gir deg kompetanse for <span class="hl">fremtiden</span>',
+  title: 'Vi gir deg kompetanse for <span class="accent">fremtiden</span>',
   lead: 'Vår kursvirksomhet er en møteplass for mennesker som søker kunnskap og inspirasjon i arbeidet med digitalisering – med instruktører som har lang praktisk og teoretisk erfaring.',
-  actions: `<button class="search-trigger" data-modal="m-search" style="height:48px;padding:0 1rem;min-width:min(100%,300px);justify-content:flex-start;background:var(--white)">${ic('search')} Søk etter kurs …</button><a class="link link--accent" href="#kommende">${ic('calendar')} Kurskalender</a><a class="link link--accent" href="#pakker">${ic('layers')} Kursoversikt</a>`,
-  art: `<div class="phero__photo">${img('kurs-deltagere', 'Kursdeltagere')}</div>`,
+  actions: `<a class="btn btn--lg" href="#kommende">${PLUS} Kurskalender</a><button class="btn btn--line btn--lg" data-modal="m-search">${ic('search')} Søk etter kurs</button>`,
 })}
+${bleed('kurs-deltagere', 'Kursdeltagere')}
 
-<section class="section section--alt" id="kommende"><div class="wrap">
-  ${head('Kurskalender', 'Kommende kurs', 'Klikk på et kurs for å melde deg på direkte.', `<a class="link rv" href="${K}/kurs/kalender">Full kurskalender ${ic('arrow-up-right')}</a>`)}
-  <div class="rows" data-stagger>${COURSES.map(c => row(c)).join('')}</div>
+<section class="sec" id="kommende"><div class="wrap">
+  ${head('Kurskalender', 'Kommende kurs', 'Velg et kurs for å melde deg på direkte.', `<a class="btn btn--line" href="${K}/kurs/kalender">Full kurskalender ${ic('arrow-up-right', 'i-diag')}</a>`)}
+  <div class="idx">${COURSES.map(eventRow).join('')}</div>
 </div></section>
 
-<section class="section" id="pakker"><div class="wrap">
-  ${head('Kursoversikt', 'Finn riktig kurs for deg og teamet', '', `<button class="btn rv" data-modal="m-contact" data-area="Kurs">Bestill bedriftsinternt kurs ${ic('arrow-right')}</button>`)}
-  <div class="grid g-3" data-stagger>
-    ${PACKAGES.map(p => `<a class="mcard" href="${K}/kurs/kategorier"><div class="mcard__img">${img(p.img, '')}<span class="card__icon" style="position:absolute;left:14px;top:14px;z-index:2;background:var(--green)">${ic(p.icon)}</span><span class="mcard__go">${ic('arrow-up-right')}</span></div><h3>${p.t}</h3><p>${p.d}</p></a>`).join('')}
+<section class="sec sec--rule" id="pakker"><div class="wrap">
+  ${head('Kursoversikt', 'Finn riktig kurs for deg og teamet', '', `<button class="btn" data-modal="m-contact" data-area="Kurs">${PLUS} Bestill bedriftsinternt kurs</button>`)}
+  <div class="cards">
+    ${PACKAGES.map((p, i) => `<a class="card" href="${K}/kurs/kategorier"><div class="media media--4x3">${img(p.img, '')}</div><div class="card__meta"><span>${pad(i + 1)}</span><i></i><span>Kursområde</span></div><h3>${p.t}</h3><p>${p.d}</p></a>`).join('')}
   </div>
 </div></section>
 
-<section class="section section--dark"><div class="wrap">
+<section class="sec sec--deep"><div class="wrap">
   ${head('Seminarer', 'Møt arbeidsdagen sammen med oss')}
-  <div class="grid g-2" data-stagger>
-    <div class="card" style="background:var(--midnight-2);color:var(--creme-light);padding:0;overflow:hidden">
-      <div class="mcard__img" style="border-radius:0;aspect-ratio:2/1">${img('god-morgen', 'God morgen med Bouvet')}</div>
-      <div style="padding:2rem" class="stack"><span class="tag tag--green">${ic('coffee')} Frokostseminarer</span><h3 class="h3">Få en god morgen med Bouvet</h3><p style="color:var(--text-on-dark-muted)">Få opp humør og energi med god frokost og god kaffe, og topp det med en faglig oppkvikker innen en rekke ulike tema.</p><a class="btn" href="#frokost">Se kommende frokostseminarer ${ic('arrow-right')}</a></div>
-    </div>
-    <div class="card" style="background:var(--midnight-2);color:var(--creme-light);padding:0;overflow:hidden">
-      <div class="mcard__img" style="border-radius:0;aspect-ratio:2/1">${img('bouvet-deler-banner', 'Bouvet deler')}</div>
-      <div style="padding:2rem" class="stack"><span class="tag tag--orange">${ic('moon')} Dags- og kveldsseminarer</span><h3 class="h3">Bouvet Deler – rundt om i hele landet</h3><p style="color:var(--text-on-dark-muted)">Ny kunnskap om fag og teknologi skaper fremdrift. Våre fageksperter deler av sin kunnskap og erfaring.</p><a class="btn" href="${K}/kurs/seminarer-dagogkveld">Se kommende seminarer ${ic('arrow-up-right')}</a></div>
-    </div>
+  <div class="grid g-2">
+    <a class="feature" href="#frokost" style="grid-template-columns:1fr"><div class="media">${img('god-morgen', 'God morgen med Bouvet')}</div><div class="feature__body"><div><span class="eyebrow">Frokostseminarer</span><h3 class="h3" style="margin-top:1rem;font-size:1.5rem;font-weight:400">Få en god morgen med Bouvet</h3><p class="muted" style="margin-top:.75rem">God frokost, god kaffe og en faglig oppkvikker innen en rekke ulike tema.</p></div><span class="link link--mint">Se kommende frokostseminarer ${ic('arrow-right')}</span></div></a>
+    <a class="feature" href="${K}/kurs/seminarer-dagogkveld" style="grid-template-columns:1fr"><div class="media">${img('bouvet-deler-banner', 'Bouvet deler')}</div><div class="feature__body"><div><span class="eyebrow">Dags- og kveldsseminarer</span><h3 class="h3" style="margin-top:1rem;font-size:1.5rem;font-weight:400">Bouvet Deler – rundt om i hele landet</h3><p class="muted" style="margin-top:.75rem">Ny kunnskap om fag og teknologi skaper fremdrift. Våre fageksperter deler av sin erfaring.</p></div><span class="link link--mint">Se kommende seminarer ${ic('arrow-right')}</span></div></a>
   </div>
 </div></section>
 
-<section class="section" id="frokost"><div class="wrap">
+<section class="sec" id="frokost"><div class="wrap">
   ${head('Frokostseminarer', 'Kommende frokostseminarer')}
-  <div class="rows" data-stagger>${EVENTS.map(e => row(e)).join('')}</div>
+  <div class="idx">${EVENTS.map(eventRow).join('')}</div>
 </div></section>
 
-<section class="section section--alt"><div class="wrap">
+<section class="sec sec--rule"><div class="wrap">
   ${head('Nyheter om kurs', 'Lærdom å hente for alle')}
-  <div class="grid g-3" data-stagger>
-    ${NEWS.map(([t, d, im, u]) => `<a class="mcard" href="${u}"><div class="mcard__img">${img(im, '')}<span class="mcard__go">${ic('arrow-up-right')}</span></div><h3>${t}</h3><p>${d}</p></a>`).join('')}
-  </div>
+  <div class="cards">${NEWS.map(([t, d, im, u]) => plainCard(t, d, im, u, 'Kurs')).join('')}</div>
 </div></section>
 
-<section class="section"><div class="wrap split">
-  <div class="stack-lg">
-    <span class="eyebrow rv">Kontakt kurs</span>
-    <h2 class="h2" data-split>Spørsmål om kurs eller bedriftsinterne opplegg?</h2>
-    <ul class="checks" data-stagger>
-      <li><span class="ic-box">${ic('mail')}</span><a class="link" href="mailto:kurs@bouvet.no">kurs@bouvet.no</a></li>
-      <li><span class="ic-box">${ic('phone')}</span><a class="link" href="tel:+4723406050">+47 23 40 60 50</a></li>
-      <li><span class="ic-box">${ic('pin')}</span>Sørkedalsveien 8, 0369 Oslo</li>
-    </ul>
-    <div class="rv"><button class="btn" data-modal="m-contact" data-area="Kurs">Send oss en forespørsel ${ic('arrow-right')}</button></div>
-  </div>
-  <div class="photo rv-scale">${img('kurslokaler', 'Bouvets kurslokaler')}</div>
-</div></section>
-
-${newsletterBand()}
+${reach({
+  title: 'Spørsmål om kurs?',
+  text: 'Ønsker dere et bedriftsinternt opplegg eller har spørsmål om et kurs? Send oss en forespørsel.',
+  id: 'kurs-kontakt',
+  contacts: `<ul class="checks"><li><span class="num">E</span><a href="mailto:kurs@bouvet.no">kurs@bouvet.no</a></li><li><span class="num">T</span><a href="tel:+4723406050">+47 23 40 60 50</a></li><li><span class="num">A</span>Sørkedalsveien 8, 0369 Oslo</li></ul>`,
+})}
 `,
 };

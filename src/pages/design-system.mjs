@@ -1,104 +1,84 @@
-import { ic, img, phero, orbit, facts } from '../parts.mjs';
+import { ic, img, phero, facts, mosaic, idxRow, glyph, PLUS, ARR } from '../parts.mjs';
 import { ICON_GROUPS } from '../icons.mjs';
+import { GLYPH_NAMES } from '../glyphs.mjs';
 
 const C = [
-  ['Brand', [['Midnight', '#11133C', '--midnight', 'Primær. Tekst, mørke flater, hover-fyll'], ['Midnight 2', '#1C1F52', '--midnight-2', 'Løftet flate på mørk bakgrunn'], ['Midnight 3', '#2A2E6B', '--midnight-3', 'Ikonfelt og tags på mørk'], ['Green', '#97FFB3', '--green', 'Aksent. CTA, fokus på mørk, uthevet ord'], ['Green deep', '#1A6B3A', '--green-deep', 'Aksenttekst på lys bakgrunn (AA)']]],
-  ['Flater', [['Creme light', '#FCF8F3', '--creme-light', 'Sidebakgrunn'], ['Sand', '#F4EAD9', '--sand', 'Alternerende seksjoner'], ['Creme', '#F9EAD4', '--creme', 'Illustrasjonsbakgrunn'], ['White', '#FFFFFF', '--white', 'Kort og skjemafelt'], ['Baby blue', '#EDF5FA', '--baby-blue', 'Info-notiser, tags']]],
-  ['Støtte', [['Orange', '#F9A86F', '--orange', 'Podcast, markører, highlights'], ['Orange soft', '#F9D4BB', '--orange-soft', 'Tag-bakgrunn'], ['Super blue', '#0617BF', '--super-blue', 'Lenke-hover, titler i kort'], ['Sky blue', '#1D43C6', '--sky-blue', 'Fokusring'], ['Hal red', '#EB1D4B', '--red', 'Feil og validering']]],
+  ['Flater', [['Midnight', '#11133C', '--midnight', 'Primær mørk flate, tekst på lys'], ['Midnight deep', '#0C0E2E', '--midnight-deep', 'Alternerende mørke seksjoner, footer'], ['Creme light', '#FCF8F3', '--creme-light', 'Lys seksjon, tekst på mørk'], ['Ink', '#010203', '--ink', 'Dypeste kontrast']]],
+  ['Aksent', [['Green', '#97FFB3', '--mint', 'Eneste aksent: knapper, markør, fremheving']]],
+  ['Fliser', [['Grey', '#F2F2F2', '--grey', 'Standard flis'], ['White', '#FFFFFF', '--white', 'Flis, kontrast'], ['Blue gray', '#C3D5E1', '--blue-gray', 'Flis, diagram 2025'], ['Creme', '#F9EAD4', '--creme', 'Flis, varm variant']]],
 ];
 const TYPE = [
-  ['Display', '--fs-display · 600 · -0.04em', '<span class="display" style="font-size:clamp(2.4rem,4vw,4.2rem)">Fremtidens samfunn</span>'],
-  ['H1', '--fs-h1 · 600 · -0.035em', '<span class="h1">Vi jobber med</span>'],
-  ['H2', '--fs-h2 · 600 · -0.032em', '<span class="h2">Våre prosjekter</span>'],
-  ['H3', '--fs-h3 · 600 · -0.028em', '<span class="h3">Kunstig intelligens</span>'],
-  ['H4', '1.15rem · 600 · -0.015em', '<span class="h4">Systemutvikling</span>'],
-  ['Lead', '--fs-lead · 400 · 1.55', '<span class="lead">Sammen med kundene skaper vi digitale løsninger.</span>'],
-  ['Body', '1rem · 400 · 1.6', '<span>Nærhet til oppdragsgiverne er avgjørende for gode løsninger.</span>'],
-  ['Etikett', 'IBM Plex Mono · 0.75rem · 500 · versaler', '<span class="eyebrow">Aktuelt nå</span>'],
-];
-const PRINCIPLES = [
-  ['layers', 'Konsistens', 'Samme farger, typografi, knapper og ikoner overalt – og samme element gjør alltid det samme. Alle sider bygges av de samme komponentene.'],
-  ['compass', 'Gjenkjennelighet', 'Menyen ligger øverst, logoen leder til forsiden, og lenker ser ut som lenker. Vi bryter ikke konvensjoner uten grunn.'],
-  ['check', 'Tilbakemelding', 'Hover, fokus, lasting, feil og suksess har alle en tydelig tilstand. Skjema viser feil inline og bekrefter innsending med animasjon.'],
-  ['shuffle', 'Fleksibilitet', 'Flere veier til målet: meny, søk, chips, tabs og lenker i innholdet. Alt fungerer med mus, tastatur og berøring.'],
-  ['command', 'Effektivitet', 'Nye brukere får tydelige CTA-er; erfarne kan bruke ⌘K-søk, piltaster i tabs og Esc for å lukke.'],
-  ['eye', 'Tilgjengelighet', 'AA-kontrast, 44 px trykkflater, synlig fokusring, skip-lenke, aria-merking og respekt for «redusert bevegelse».'],
+  ['Display', 'Inter 400 · -0.042em · 1.02', '<span class="display" style="font-size:clamp(2.2rem,3.6vw,4rem)">Fremtidens samfunn</span>'],
+  ['H1', 'Inter 400 · -0.035em', '<span class="h1">Vi jobber med</span>'],
+  ['H2', 'Inter 400 · -0.035em', '<span class="h2">Våre prosjekter</span>'],
+  ['H3', 'Inter 500 · -0.015em', '<span class="h3">Kunstig intelligens</span>'],
+  ['Lead', 'Inter 400 · 1.6 · 62 % opasitet', '<span class="lead">Sammen med kundene skaper vi digitale løsninger.</span>'],
+  ['Etikett', 'Inter 500 · 11 px · versaler · +0.09em', '<span class="eyebrow">Hvorfor Bouvet</span>'],
+  ['Meta', 'IBM Plex Mono · 11 px', '<span class="num">01 / 09</span>'],
 ];
 
 export default {
   slug: 'design-system', file: 'design-system',
   title: 'Design system – Bouvet',
-  desc: 'Farger, typografi, ikoner, komponenter og bevegelse for Bouvet.',
+  desc: 'Farger, typografi, glyfer, ikoner, komponenter og bevegelse for Bouvet.',
   body: `
 ${phero({
-  crumb: 'Design system', eyebrow: 'Bouvet DS · v1.0',
-  title: 'Ett system. <span class="hl">Alle</span> flater.',
-  lead: 'Byggeklossene bak bouvet.no – bygget på Bouvets egen palett og Inter. Klikk på en farge eller et ikon for å kopiere.',
-  art: facts([['Versjon', '3.0'], ['Ikoner', '66'], ['Typografi', 'Inter · IBM Plex Mono'], ['Bevegelse', 'Kun inngang']]),
+  crumb: 'Design system', eyebrow: 'Bouvet DS · v4',
+  title: 'Sterilt. Seriøst. <span class="accent">Autoritativt.</span>',
+  lead: 'Byggeklossene bak bouvet.no – Bouvets egen palett og Inter, rette hjørner, hårlinjer og én aksent. Klikk på en farge for å kopiere.',
+  after: facts([['Versjon', '4.0'], ['Hjørner', '0 px'], ['Typografi', 'Inter · IBM Plex Mono'], ['Bevegelse', 'Kun tekst, kun inngang']]),
 })}
 
-<section class="section"><div class="wrap ds-layout">
+<section class="sec sec--rule"><div class="wrap ds-layout">
   <nav class="ds-nav" aria-label="Design system">
-    ${['prinsipper:Prinsipper', 'farger:Farger', 'typografi:Typografi', 'rom:Rom og form', 'ikoner:Ikoner', 'knapper:Knapper og lenker', 'skjema:Skjema', 'kort:Kort og lister', 'bevegelse:Bevegelse', 'popup:Popup'].map(s => { const [h, l] = s.split(':'); return `<a href="#${h}">${l}</a>`; }).join('')}
+    ${['farger:Farger', 'typografi:Typografi', 'glyfer:Glyfer', 'fliser:Fliser', 'knapper:Knapper', 'lister:Lister', 'skjema:Skjema', 'ikoner:Ikoner', 'bevegelse:Bevegelse'].map(s => { const [id, l] = s.split(':'); return `<a href="#${id}">${l}</a>`; }).join('')}
   </nav>
   <div>
-    <section class="ds-sec" id="prinsipper"><h2 class="h3">Prinsipper</h2><p>Seks UI-prinsipper styrer alle valg – fra fargebruk til mikro-interaksjoner.</p>
-      <div class="grid g-3 svc-grid" data-stagger>${PRINCIPLES.map(([i, t, d], k) => `<div class="card svc${k === 2 ? ' is-featured' : ''}" tabindex="0"><span class="card__icon">${ic(i)}</span><h3 class="h4">${t}</h3><p>${d}</p></div>`).join('')}</div>
+    <section class="ds-sec" id="farger"><h2 class="h2">Farger</h2><p>Midnight bærer siden. Creme light brukes for lyse seksjoner og skjema. Green er eneste aksent – kun for handling, markører og ett fremhevet ord per overskrift.</p>
+      ${C.map(([g, list]) => `<h3 class="eyebrow" style="margin-top:2.5rem;display:flex">${g}</h3><div class="swatches">${list.map(([n, hex, v, use]) => `<button class="swatch" data-copy="${hex}"><div class="swatch__c" style="background:${hex}"></div><div class="swatch__m"><b>${n}</b>${hex} · <code>${v}</code><br><span class="muted">${use}</span></div></button>`).join('')}</div>`).join('')}
     </section>
 
-    <section class="ds-sec" id="farger"><h2 class="h3">Farger</h2><p>Midnight og Creme bærer flatene, Green er aksenten som kun brukes for handling og fremheving. Kontrast: Midnight på Creme light 16.8:1, Green på Midnight 14.6:1 – begge godt over WCAG AAA.</p>
-      ${C.map(([g, list]) => `<h3 class="h4" style="margin:1.5rem 0 1rem">${g}</h3><div class="swatches">${list.map(([n, hex, v, use]) => `<button class="swatch" data-copy="${hex}"><div class="swatch__c" style="background:${hex}${hex === '#FFFFFF' || hex === '#FCF8F3' ? ';box-shadow:inset 0 -1px 0 var(--line)' : ''}"><span>${hex}</span></div><div class="swatch__m"><b>${n}</b><code>${v}</code><br><span class="muted">${use}</span></div></button>`).join('')}</div>`).join('')}
+    <section class="ds-sec" id="typografi"><h2 class="h2">Typografi</h2><p>Inter i lette vekter (400) for overskrifter gir et nøkternt, autoritativt uttrykk. Stram sporing på store grader. Etiketter i versaler med grønn firkant.</p>
+      <div style="margin-top:2rem">${TYPE.map(([n, spec, ex]) => `<div class="type-row"><div><b style="font-weight:500">${n}</b><br><code>${spec}</code></div><div>${ex}</div></div>`).join('')}</div>
     </section>
 
-    <section class="ds-sec" id="typografi"><h2 class="h3">Typografi</h2><p>Inter (variabel, 400–700) for tekst og titler, IBM Plex Mono for etiketter, metadata og nummerering – et nøkternt, dokumentaktig uttrykk. Skala med clamp() – flytende mellom mobil og desktop.</p>
-      ${TYPE.map(([n, spec, ex]) => `<div class="type-row"><div><b>${n}</b><br><code>${spec}</code></div><div>${ex}</div></div>`).join('')}
+    <section class="ds-sec" id="glyfer"><h2 class="h2">Glyfer</h2><p>Tynne linjemerker (1 px) markerer fliser og steg. De roterer 45° på hover – ingen andre bevegelser.</p>
+      <div class="glyph-grid">${GLYPH_NAMES.map(n => `<div title="${n}">${glyph(n)}</div>`).join('')}</div>
     </section>
 
-    <section class="ds-sec" id="rom"><h2 class="h3">Rom og form</h2><p>4-punkts grid, generøs seksjonsluft og rette hjørner overalt. Seksjoner er kvadratiske paneler stablet på en nøytral ramme med 10 px mellomrom. Hårfine linjer strukturerer innholdet.</p>
-      <table class="token-table"><thead><tr><th>Token</th><th>Verdi</th><th>Bruk</th></tr></thead><tbody>
-        ${[['--s-2', '8px', 'Ikon ↔ tekst'], ['--s-4', '16px', 'Skjemafelt, kort-innhold'], ['--s-6', '32px', 'Kort-padding'], ['--s-8', '64px', 'Blokker'], ['--section', '72–128px', 'Seksjonsavstand'], ['--r-*', '0', 'Alle flater – rette hjørner'], ['--sh-1', 'subtil', 'Kort i hvile'], ['--sh-3', 'dyp', 'Hover-løft, popup']].map(r => `<tr><td><code>${r[0]}</code></td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('')}
-      </tbody></table>
-      <div class="demo" style="margin-top:1.5rem">${['--r-sm', '--r-md', '--r-lg', '--r-xl', '--r-pill'].map(r => `<div style="width:88px;height:64px;background:var(--midnight);border-radius:var(${r});display:grid;place-items:center;color:var(--green);font-size:.7rem;font-weight:600">${r}</div>`).join('')}</div>
+    <section class="ds-sec" id="fliser"><h2 class="h2">Fliser</h2><p>Kvadratiske fliser i forskjøvet rutenett. På hover skifter flisen til grønn, glyfen roterer og en pil kommer frem.</p>
+      <div style="margin-top:2rem">${mosaic([{ t: 'Grey', d: 'Standard flis', href: '#fliser' }, { t: 'Green', d: 'Fremhevet flis', href: '#fliser' }, { t: 'White', d: 'Kontrastflis', href: '#fliser' }, { t: 'Blue gray', d: 'Rolig variant', href: '#fliser' }], { cols: 3, per: 2, label: '<span class="eyebrow">Rutenett 3 × n</span>' })}</div>
     </section>
 
-    <section class="ds-sec" id="ikoner"><h2 class="h3">Ikoner</h2><p>Egen linje-ikonserie på 24 × 24 grid, 1,75 strek, runde ender og 2 px luft. Gruppert etter seksjonen de hører til. På hover skifter ikonet farge.</p>
-      ${ICON_GROUPS.map(g => `<div class="icon-group"><h4 class="h4">${ic(Object.keys(g.icons)[0])} ${g.name} <span class="tag">${Object.keys(g.icons).length}</span></h4><p>${g.desc}</p><div class="icon-grid">${Object.keys(g.icons).map(k => `<button class="icon-tile" data-copy="${k}">${ic(k)}<span>${k}</span></button>`).join('')}</div></div>`).join('')}
+    <section class="ds-sec" id="knapper"><h2 class="h2">Knapper og lenker</h2><p>Rette hjørner. Primær er grønn og blir creme på hover; plusstegnet roterer, pilen skyves. Sekundær er en hårlinje som fylles grønt.</p>
+      <div class="demo"><button class="btn btn--lg">${PLUS} Primær</button><button class="btn btn--line btn--lg">Sekundær ${ARR}</button><button class="btn">${PLUS} Standard</button><button class="btn btn--sm">${PLUS} Liten</button><a class="link" href="#knapper">Tekstlenke ${ic('arrow-right')}</a><button class="circ" aria-label="Forrige">${ic('arrow-left')}</button><button class="circ is-on" aria-label="Neste">${ic('arrow-right')}</button></div>
+      <div class="demo demo--light on-light"><button class="btn btn--dark btn--lg">${PLUS} Mørk</button><button class="btn btn--lg">${PLUS} Primær på lys</button><button class="btn btn--line btn--lg">Sekundær</button><span class="tag">Etikett</span><span class="tag tag--mint">Vedtatt</span></div>
     </section>
 
-    <section class="ds-sec" id="knapper"><h2 class="h3">Knapper og lenker</h2><p>Primærknappen er grønn og fylles med midnight på hover. Maks én primærknapp per visning. Min. høyde 48 px.</p>
-      <div class="demo"><button class="btn">Primær ${ic('arrow-right')}</button><button class="btn btn--dark">Mørk ${ic('arrow-right')}</button><button class="btn btn--ghost">Sekundær</button><button class="btn btn--sm">Liten</button><a class="link" href="#knapper">Tekstlenke ${ic('arrow-right')}</a><button class="icon-btn" aria-label="Ikonknapp">${ic('arrow-right')}</button></div>
-      <div class="demo demo--dark on-dark" style="margin-top:1rem"><button class="btn">Primær ${ic('arrow-right')}</button><button class="btn btn--ghost">Sekundær</button><a class="link link--accent" href="#knapper">Aksentlenke ${ic('arrow-right')}</a></div>
-      <div class="demo" style="margin-top:1rem"><span class="tag">${ic('article')}Artikkel</span><span class="tag tag--green">Guide</span><span class="tag tag--orange">${ic('podcast')}Podcast</span><span class="tag tag--dark">Kunde</span><button class="chip" aria-pressed="true">Valgt chip</button><button class="chip" aria-pressed="false">Chip <span class="count">12</span></button></div>
+    <section class="ds-sec" id="lister"><h2 class="h2">Lister</h2><p>Lange innholdsmengder vises som nummererte rader – lett å skanne. På hover tegnes en grønn linje, raden skyves og pilen fylles.</p>
+      <div class="idx" style="margin-top:2rem">${idxRow({ n: '01', t: 'Systemutvikling', d: 'Smidig, sikker og skalerbar systemutvikling.', href: '#lister' })}${idxRow({ date: ['03', 'des'], t: 'Hvordan modernisere komplekse systemer?', m: 'Oslo<span class="tag">Frokostseminar</span>', href: '#lister', go: 'plus' })}</div>
     </section>
 
-    <section class="ds-sec" id="skjema"><h2 class="h3">Skjema</h2><p>Etikett alltid over feltet, feilmelding inline med ikon. Fokus gir blå ring, feil gir rød ramme og en liten rist.</p>
-      <div class="demo" style="display:block"><form class="form-grid" data-form data-success="Skjemaet er gyldig – alt ser bra ut">
-        <div class="field"><label for="ds-1">Navn</label><input class="input" id="ds-1" required placeholder="Ola Nordmann"><span class="err">${ic('alert')}Dette feltet må fylles ut</span></div>
+    <section class="ds-sec" id="skjema"><h2 class="h2">Skjema</h2><p>Kun underlinje, etikett over feltet, feilmelding inline. Skjemaer på mørk flate i lys seksjon – som i referansen.</p>
+      <div class="formpanel" style="margin-top:2rem"><form class="form-grid" data-form data-success="Skjemaet er gyldig">
+        <div class="field"><label for="ds-1">Navn *</label><input class="input" id="ds-1" required><span class="err">${ic('alert')}Dette feltet må fylles ut</span></div>
         <div class="field is-invalid"><label for="ds-2">E-post (feiltilstand)</label><input class="input" id="ds-2" value="ola@" type="email" required><span class="err">${ic('alert')}Skriv inn en gyldig e-postadresse</span></div>
-        <div class="field"><label for="ds-3">Fagområde</label><select class="select" id="ds-3"><option>Kunstig intelligens</option><option>Design</option></select></div>
-        <div class="field"><span class="label">Valg</span><div class="radio-cards"><label><input type="radio" name="dsr" checked>Norsk</label><label><input type="radio" name="dsr">English</label></div></div>
-        <div class="field full"><label class="check"><input type="checkbox" checked> Avkrysningsboks med tilpasset stil</label></div>
-        <div class="full"><button class="btn" type="submit">Test validering ${ic('arrow-right')}</button></div>
+        <div class="field full"><label for="ds-3">Fagområde</label><select class="select" id="ds-3"><option>Kunstig intelligens</option><option>Design</option></select></div>
+        <div class="full"><button class="btn btn--block btn--lg" type="submit">${PLUS} Test validering</button></div>
       </form></div>
     </section>
 
-    <section class="ds-sec" id="kort"><h2 class="h3">Kort og lister</h2><p>Kort inverteres til midnight på hover og løftes 4 px. Rader fylles med midnight. Ingen rotasjon eller sprett – kun tydelig kontrast.</p>
-      <div class="grid g-3 svc-grid"><a class="card svc" href="#kort"><span class="card__icon">${ic('cloud')}</span><h3 class="h4">Tjenestekort</h3><p>Hover meg – kortet inverteres.</p><span class="card__more">Les mer ${ic('arrow-right')}</span></a>
-        <a class="mcard" href="#kort"><div class="mcard__img">${img('proj-natur', '')}<span class="mcard__go">${ic('arrow-up-right')}</span></div><span class="tag tag--dark">Mediekort</span><h3>Bildet zoomer, pil spretter inn</h3></a>
-        <div class="person" style="align-self:start"><span class="avatar">BV</span><div><b>Personkort</b><span>Løftes 4 px på hover</span></div></div></div>
-      <div class="rows" style="margin-top:1.5rem"><a class="row" href="#kort" onclick="return false"><span class="row__date"><b>03</b><span>des</span></span><span><span class="row__title">Listerad – arrangement</span><span class="row__sub">${ic('pin')}Oslo</span></span><span class="tag">Frokostseminar</span><span class="row__cta">${ic('arrow-right')}</span></a></div>
+    <section class="ds-sec" id="ikoner"><h2 class="h2">Ikoner</h2><p>Linjeikoner på 24 × 24, 1,75 strek. Brukes funksjonelt i knapper, lister og skjema – glyfene står for dekor.</p>
+      ${ICON_GROUPS.map(g => `<h3 class="eyebrow" style="margin-top:2.5rem;display:flex">${g.name}</h3><div class="icon-grid">${Object.keys(g.icons).map(k => `<button class="icon-cell" data-copy="${k}">${ic(k)}${k}</button>`).join('')}</div>`).join('')}
     </section>
 
-    <section class="ds-sec" id="bevegelse"><h2 class="h3">Bevegelse</h2><p>Bevegelse er forbeholdt inngang: tekst og innhold glir inn én gang når det kommer til syne. Ingen loopende grafikk, ingen dekorative animasjoner. Hover gir tydelig, rolig tilbakemelding. Alt slås av ved «redusert bevegelse».</p>
-      <table class="token-table"><thead><tr><th>Token</th><th>Verdi</th><th>Bruk</th></tr></thead><tbody>
-        <tr><td><code>--t-fast</code></td><td>180 ms</td><td>Farge, opasitet</td></tr><tr><td><code>--t-base</code></td><td>320 ms</td><td>Hover, løft, tabs</td></tr><tr><td><code>--t-slow</code></td><td>640 ms</td><td>Ikon-sprett, paneler</td></tr>
-        <tr><td><code>--ease-out</code></td><td>cubic-bezier(.22,1,.36,1)</td><td>Standard for alt som kommer inn</td></tr>
+    <section class="ds-sec" id="bevegelse" style="border:0"><h2 class="h2">Bevegelse</h2><p>Kun tekst animeres, og kun ved inngang: ord i overskrifter glir opp bak en maske (900 ms, ease-out), avsnitt toner inn 14 px. Ingen looper, ingen parallakse, ingen bilder i bevegelse. «Redusert bevegelse» slår alt av. Menyen ligger fast øverst.</p>
+      <table class="kv" style="margin-top:2rem"><tbody>
+        <tr><th>Overskrift</th><td>ord for ord · 38 ms forsinkelse · 900 ms</td></tr>
+        <tr><th>Avsnitt</th><td>opasitet + 14 px · 700 ms</td></tr>
+        <tr><th>Hover</th><td>farge 360 ms · glyf 45° · pil 3–4 px</td></tr>
+        <tr><th>Kurve</th><td><code>cubic-bezier(.22, 1, .36, 1)</code></td></tr>
       </tbody></table>
-      <div class="demo ease-demo" style="display:grid;margin-top:1.5rem"><p class="small muted">Hold musepekeren over boksen</p>${[['ease-out', 'var(--ease-out)'], ['ease-in-out', 'var(--ease-in-out)']].map(([n, e]) => `<div><code>${n}</code><span class="track"><span class="ball" style="transition:left 900ms ${e}"></span></span></div>`).join('')}</div>
-          </section>
-
-    <section class="ds-sec" id="popup" style="border:0"><h2 class="h3">Popup</h2><p>Alle skjema åpnes i en popup som glir inn mens bakgrunnen blurres (14 px). Fokus fanges i dialogen, Esc lukker, og innsending gir en animert bekreftelse.</p>
-      <div class="demo"><button class="btn" data-modal="m-contact">Kontakt ${ic('arrow-right')}</button><button class="btn btn--dark" data-modal="m-newsletter">Nyhetsbrev</button><button class="btn btn--ghost" data-modal="m-event" data-title="Teknologi og trender som vil prege 2027" data-meta="10. des · Stavanger">Påmelding</button><button class="btn btn--ghost" data-modal="m-apply" data-title="Erfaren UX-/produktdesigner" data-meta="Drammen">Søknad</button><button class="btn btn--ghost" data-modal="m-ir">Børsmeldinger</button><button class="btn btn--ghost" data-modal="m-search">${ic('search')} Søk ⌘K</button></div>
     </section>
   </div>
 </div></section>

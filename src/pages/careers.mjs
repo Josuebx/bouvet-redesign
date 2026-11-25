@@ -1,14 +1,14 @@
-import { ic, img, head, row, phero, SCRIBBLE, RING, newsletterBand, BAND_WAVES } from '../parts.mjs';
+import { ic, img, head, phero, bleed, mosaic, idxRow, plainCard, reach, figs, PLUS, ARR, pad } from '../parts.mjs';
 import { JOBS } from '../data.mjs';
 
 const ROLES = ['Systemutviklere', 'AI-spesialister', 'Data engineers', 'Sikkerhetseksperter', 'Analytikere', 'Prosjektledere', 'Rådgivere', 'Designere', 'Testledere', 'Arkitekter'];
 const KNOW = [
-  ['growth', 'Faglig utvikling', 'Et sterkt fagmiljø der vi deler kunnskap, utfordrer hverandre og utvikler oss i takt med teknologien.'],
-  ['eye', 'Hva betyr visjonen vår?', 'Vi går foran og bygger fremtidens samfunn – sammen med noen av Norges mest samfunnskritiske virksomheter.'],
-  ['ai', 'KI og hverdagen vår', 'Vi er langt fremme på AI og bruker det både i leveransene til kundene og i vår egen hverdag.'],
-  ['anchor', 'Trygg arbeidsplass', 'En trygg arbeidsgiver med et solid fundament og langsiktige partnerskap med kundene.'],
-  ['heart', 'Kultur- og verdidrevet', 'Troverdighet, delingskultur, frihet, jordnærhet og entusiasme er rettesnorer i alt vi gjør.'],
-  ['shuffle', 'Varierte arbeidsoppgaver', 'Oppgaver som betyr noe – i store og små tverrfaglige team, i privat og offentlig sektor.'],
+  ['Faglig utvikling', 'Et sterkt fagmiljø der vi deler kunnskap, utfordrer hverandre og utvikler oss i takt med teknologien.'],
+  ['Hva betyr visjonen vår?', 'Vi går foran og bygger fremtidens samfunn – sammen med noen av Norges mest samfunnskritiske virksomheter.'],
+  ['KI og hverdagen vår', 'Vi er langt fremme på AI og bruker det både i leveransene til kundene og i vår egen hverdag.'],
+  ['Trygg arbeidsplass', 'En trygg arbeidsgiver med et solid fundament og langsiktige partnerskap med kundene.'],
+  ['Kultur- og verdidrevet', 'Troverdighet, delingskultur, frihet, jordnærhet og entusiasme er rettesnorer i alt vi gjør.'],
+  ['Varierte arbeidsoppgaver', 'Oppgaver som betyr noe – i store og små tverrfaglige team, i privat og offentlig sektor.'],
 ];
 
 export default {
@@ -18,62 +18,52 @@ export default {
   body: `
 ${phero({
   crumb: 'Bli en av oss', eyebrow: 'Karriere',
-  title: 'Bli en av oss – og løs oppgaver som <span class="hl">betyr noe</span>',
-  lead: 'I Bouvet får du jobbe med noen av Norges mest samfunnskritiske virksomheter, i et fagmiljø der vi deler kunnskap, utfordrer hverandre og skaper resultater sammen.',
-  actions: `<a class="btn" href="#stillinger">Se ledige stillinger ${ic('arrow-right')}</a><button class="btn btn--ghost" data-modal="m-apply" data-title="Åpen søknad" data-meta="Alle kontorer">Send åpen søknad</button>`,
-  art: `<div class="phero__photo">${img('team-ost', 'Ansatte i Bouvet')}</div>`,
+  title: 'Bli en av oss – og løs oppgaver som <span class="accent">betyr noe</span>',
+  lead: 'I Bouvet jobber du med noen av Norges mest samfunnskritiske virksomheter, i et fagmiljø der vi deler kunnskap, utfordrer hverandre og skaper resultater sammen.',
+  actions: `<a class="btn btn--lg" href="#stillinger">${PLUS} Se ledige stillinger</a><button class="btn btn--line btn--lg" data-modal="m-apply" data-title="Åpen søknad" data-meta="Alle kontorer">Send åpen søknad</button>`,
 })}
+${bleed('team-ost', 'Ansatte i Bouvet')}
 
-<section class="logos"><div class="wrap">
-  <p class="logos__label">Vi søker</p>
-  <ul class="clients">${ROLES.map(r => `<li>${r}</li>`).join('')}</ul>
-</div></section>
-
-<section class="section"><div class="wrap split">
-  <div class="photo-wrap rv-scale"><div class="photo">${img('office-people', 'Kollegaer i Bouvet')}</div></div>
-  <div class="stack-lg">
-    <span class="eyebrow rv">Hvorfor Bouvet</span>
-    <h2 class="h2" data-split>En trygg arbeidsgiver – og et sted å <span class="hl">vokse</span></h2>
-    <p class="lead rv">Vi har over tid bygget solide, tette og langsiktige partnerskap med kundene våre, og utvikler oss kontinuerlig i takt med deres behov, ny teknologi og endringer i samfunnet.</p>
-    <p class="rv muted">For deg betyr det en trygg arbeidsgiver med et solid fundament – men også et sted der du får utvikle deg i takt med teknologien.</p>
-    <ul class="checks" data-stagger>
-      <li><span class="ic-box">${ic('gift')}</span>Konkurransedyktig lønn, overtidsbetaling og kollektiv bonus</li>
-      <li><span class="ic-box">${ic('coins')}</span>Aksjeprogram og gode pensjons- og forsikringsordninger</li>
-      <li><span class="ic-box">${ic('pin')}</span>17 kontorer i Norge og Sverige</li>
-    </ul>
+<section class="sec"><div class="wrap">
+  <div class="lr">
+    <div class="lr__l"><span class="eyebrow rv">Vi søker</span></div>
+    <ul class="wordlist">${ROLES.map(r => `<li>${r}</li>`).join('')}</ul>
   </div>
 </div></section>
 
-<section class="section section--alt" id="stillinger"><div class="wrap">
-  ${head('Ledige stillinger', 'Finn din neste rolle', 'Klikk på en stilling for å sende en rask søknad.', `<a class="link rv" href="https://www.bouvet.no/ledige-stillinger">Alle ledige stillinger ${ic('arrow-up-right')}</a>`)}
-  <div class="rows" data-stagger>${JOBS.map(j => row(j, 'm-apply')).join('')}</div>
-  <div class="note rv" style="margin-top:2rem">${ic('bubble')}<div>Fant du ikke helt det du lette etter? <a class="link" href="#" data-modal="m-apply" data-title="Åpen søknad" data-meta="Alle kontorer">Send oss en åpen søknad ${ic('arrow-right')}</a></div></div>
+<section class="sec sec--rule"><div class="wrap">
+  ${head('Hvorfor Bouvet', 'En trygg arbeidsgiver – <span class="accent">og et sted å vokse</span>', 'Vi har bygget solide, langsiktige partnerskap med kundene våre. For deg betyr det et solid fundament – og et sted der du utvikler deg i takt med teknologien.')}
+  <div class="lr"><div></div>${figs([['Bonus', 'Konkurransedyktig lønn, overtidsbetaling og kollektiv bonus'], ['Aksjer', 'Aksjeprogram og gode pensjons- og forsikringsordninger'], ['17', 'Kontorer i Norge og Sverige']]).replace('class="figs"', 'class="figs" style="grid-template-columns:repeat(3,minmax(0,1fr))"')}</div>
 </div></section>
 
-<section class="section"><div class="wrap">
-  ${head('Bli bedre kjent med oss', 'Hva bør du egentlig vite om Bouvet?', 'Virksomheter løfter gjerne frem det samme når de presenterer seg. Vi ga oppgaven til noen av folkene våre.')}
-  <div class="grid g-3 svc-grid" data-stagger>
-    ${KNOW.map(([i, t, d], k) => `<div class="card svc${k === 0 ? ' is-featured' : ''}" tabindex="0"><span class="card__icon">${ic(i)}</span><h3 class="h4">${t}</h3><p>${d}</p><span class="card__more">${ic('play')} Se historien</span></div>`).join('')}
+<section class="sec sec--deep" id="stillinger"><div class="wrap">
+  ${head('Ledige stillinger', 'Finn din neste rolle', 'Velg en stilling for å sende en rask søknad.', `<a class="btn btn--line" href="https://www.bouvet.no/ledige-stillinger">Alle stillinger ${ic('arrow-up-right', 'i-diag')}</a>`)}
+  <div class="idx">
+    ${JOBS.map((j, i) => idxRow({ n: pad(i + 1), t: j.t, m: `${j.place}<span class="tag">${j.cat}</span>`, attrs: `data-modal="m-apply" data-title="${j.t}" data-meta="${j.place}"`, go: 'plus' })).join('')}
+    ${idxRow({ n: '—', t: 'Fant du ikke det du lette etter?', d: 'Send oss en åpen søknad – vi leser alle.', m: 'Alle kontorer', attrs: 'data-modal="m-apply" data-title="Åpen søknad" data-meta="Alle kontorer"', go: 'plus' })}
   </div>
 </div></section>
 
-<section class="section section--alt"><div class="wrap">
+<section class="sec"><div class="wrap">
+  ${head('Bli bedre kjent med oss', 'Hva bør du egentlig vite om Bouvet?', 'Vi ga oppgaven til noen av folkene våre.')}
+  ${mosaic(KNOW.map(([t, d], i) => ({ t, d, num: pad(i + 1) })), { cols: 4, per: 3, tones: ['grey', 'mint', 'white', 'blue', 'creme', 'grey'] })}
+</div></section>
+
+<section class="sec sec--rule"><div class="wrap">
   ${head('Verdt å vite', 'Mer enn en arbeidsplass')}
-  <div class="grid g-3" data-stagger>
-    <a class="mcard" href="https://www.bouvet.no/bli-en-av-oss/betingelser"><div class="mcard__img">${img('team-marc', '')}<span class="mcard__go">${ic('arrow-up-right')}</span></div><span class="tag tag--green">${ic('gift')}Betingelser</span><h3>Betingelser og goder</h3><p>Vi lever gjerne for jobben – men skal også leve av den. Konkurransedyktig lønn, bonus, aksjeprogram og gode ordninger.</p></a>
-    <a class="mcard" href="https://www.bouvet.no/bli-en-av-oss/vi-tilbyr-deg-mer-enn-en-arbeidsplass"><div class="mcard__img">${img('kontor-oslo', '')}<span class="mcard__go">${ic('arrow-up-right')}</span></div><span class="tag">${ic('heart')}Kultur</span><h3>Vi tilbyr deg mer enn en arbeidsplass</h3><p>En kultur og et arbeidsmiljø basert på samarbeid, samhold og deling – den eneste rette måten for oss å lykkes.</p></a>
-    <a class="mcard" href="https://www.bouvet.no/om-bouvet/de-ansattes-arsrapport-25"><div class="mcard__img">${img('arsrapport-2025', '')}<span class="mcard__go">${ic('arrow-up-right')}</span></div><span class="tag tag--orange">${ic('report')}Rapport</span><h3>De ansattes årsrapport 2025</h3><p>Ikke sektordiagrammer og kontantstrøm – men en fortelling om det viktigste i Bouvet: folkene.</p></a>
+  <div class="cards">
+    ${plainCard('Betingelser og goder', 'Vi lever gjerne for jobben – men skal også leve av den. Lønn, bonus, aksjeprogram og gode ordninger.', 'team-marc', 'https://www.bouvet.no/bli-en-av-oss/betingelser', 'Betingelser')}
+    ${plainCard('Vi tilbyr deg mer enn en arbeidsplass', 'En kultur basert på samarbeid, samhold og deling – den eneste rette måten for oss å lykkes.', 'kontor-oslo', 'https://www.bouvet.no/bli-en-av-oss/vi-tilbyr-deg-mer-enn-en-arbeidsplass', 'Kultur')}
+    ${plainCard('De ansattes årsrapport 2025', 'Ikke sektordiagrammer og kontantstrøm – men en fortelling om det viktigste i Bouvet: folkene.', 'arsrapport-2025', 'https://www.bouvet.no/om-bouvet/de-ansattes-arsrapport-25', 'Rapport')}
   </div>
 </div></section>
 
-<section class="section--tight"><div class="wrap">
-  <div class="band on-dark band--split rv-scale">
-    ${BAND_WAVES()}
-    <div><span class="eyebrow">${ic('graduation')} Student eller nyutdannet?</span><h2 class="h2" style="margin-top:1rem" data-split>Start karrieren der løsningene betyr noe</h2><p class="lead" style="margin-left:0">Jobb i store og små tverrfaglige team og vær med å utvikle virksomhetskritiske og samfunnsnyttige løsninger – og ha det gøy på veien!</p></div>
-    <div style="display:flex;gap:.75rem;flex-wrap:wrap;justify-content:flex-end;position:relative"><a class="btn" href="https://www.bouvet.no/bli-en-av-oss/er-du-nyutdannet-eller-student">Les mer ${ic('arrow-right')}</a><button class="btn btn--ghost" data-modal="m-apply" data-title="Sommerjobb / graduate" data-meta="Student eller nyutdannet">Meld interesse</button></div>
-  </div>
+<section class="strip"><div class="wrap strip__in">
+  <div><span class="eyebrow rv">Student eller nyutdannet?</span><h2 class="h2" style="margin-top:1.25rem" data-split>Start karrieren der løsningene betyr noe</h2></div>
+  <div><p class="rv" style="color:var(--fg-muted);max-width:30rem">Jobb i store og små tverrfaglige team og vær med å utvikle virksomhetskritiske og samfunnsnyttige løsninger.</p>
+    <div class="row-actions" style="margin-top:1.5rem"><a class="btn btn--dark btn--lg" href="https://www.bouvet.no/bli-en-av-oss/er-du-nyutdannet-eller-student">${PLUS} Les mer</a><button class="btn btn--line btn--lg" data-modal="m-apply" data-title="Sommerjobb / graduate" data-meta="Student eller nyutdannet">Meld interesse</button></div></div>
 </div></section>
 
-${newsletterBand()}
+${reach({ title: 'Snakk med oss', text: 'Lurer du på hvordan det er å jobbe i Bouvet? Send oss noen ord, så kobler vi deg med noen i fagmiljøet du er interessert i.', tab: 1 })}
 `,
 };

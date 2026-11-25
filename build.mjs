@@ -16,4 +16,4 @@ for (const p of [home, services, careers, blog, investor, courses, about, ds]) {
   writeFileSync(`dist/${p.file}.html`, page(p));
   console.log('✓', p.file);
 }
-writeFileSync('dist/404.html', page({ slug: '404', title: 'Siden finnes ikke – Bouvet', desc: '', body: `<section class="section"><div class="wrap" style="text-align:center"><p class="display">404</p><p class="lead" style="margin:1rem auto 2rem">Vi fant ikke siden du lette etter.</p><a class="btn" href="/">Til forsiden</a></div></section>` }));
+writeFileSync('dist/404.html', page({ slug: '404', title: 'Siden finnes ikke – Bouvet', desc: '', body: `<section class="sec"><div class="wrap lr"><div class="lr__l"><span class="eyebrow">Feil 404</span></div><div><p class="display" data-split>Siden finnes <span class="accent">ikke</span></p><p class="lead rv" style="margin:1.5rem 0 2rem">Vi fant ikke siden du lette etter.</p><a class="btn btn--lg" href="/">Til forsiden</a></div></div></section>` }));

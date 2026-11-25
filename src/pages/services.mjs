@@ -1,34 +1,29 @@
-import { ic, img, head, postCard, projectCard, phero, orbit, facts, contactBand } from '../parts.mjs';
+import { ic, img, head, phero, bleed, mosaic, slider, reach, glyphAt, PLUS, ARR, DIAG, pad } from '../parts.mjs';
 import { SERVICES, PROJECTS, POSTS } from '../data.mjs';
+import { PROJECT_SLIDES } from './home.mjs';
 
 const IMG = { radgivning: 'workshop', systemutvikling: 'owasp-ctf', data: 'tverrfaglig-team', ai: 'ai-brain', arbeidsplass: 'kurs-kontor', design: 'kundeopplevelse', sky: 'proj-sikt', 'industriell-it': 'proj-dokumenter', sikkerhet: 'sikkerhet-ai-1' };
 const TAGS = { radgivning: 'radgivning', systemutvikling: 'systemutvikling', data: 'data', ai: 'ai', arbeidsplass: 'arbeidsplass', design: 'design', sky: 'sky', 'industriell-it': 'industri', sikkerhet: 'sikkerhet' };
 const B = 'https://www.bouvet.no/vi-jobber-med/kompetansekategorier/';
 const URL = { radgivning: 'radgivning', systemutvikling: 'systemutvikling', data: 'datadrevet-innsikt-og-analyse', ai: 'kunstig-intelligens', arbeidsplass: 'Digital%20arbeidsplass', design: 'design', sky: 'sky', 'industriell-it': 'industriell-it', sikkerhet: 'sikkerhet' };
+const short = t => t.split(' og ')[0].split(',')[0];
 
 const area = (s, i) => {
   const posts = POSTS.filter(p => (p.tags || '').split(' ').includes(TAGS[s.id])).slice(0, 2);
   const projs = PROJECTS.filter(p => p.tags.includes(TAGS[s.id])).slice(0, 2);
-  const rev = i % 2 === 1;
+  const rel = [...projs.map(p => [p.href, `${p.client}: ${p.title}`, 'Prosjekt']), ...posts.map(p => [p.u, p.t, p.type])];
   return `
-<article class="section" id="${s.id}" style="padding-block:clamp(3rem,5vw,5rem);${i ? 'border-top:1px solid var(--line)' : ''}">
-  <div class="wrap split" style="${rev ? 'direction:rtl' : ''}">
-    <div class="photo-wrap rv-scale" style="direction:ltr">
-      <div class="photo" style="aspect-ratio:16/12">${img(IMG[s.id], '')}</div>
-      <span class="card__icon" style="position:absolute;left:1.25rem;top:1.25rem;width:56px;height:56px;border-radius:var(--r-sm);background:var(--green);box-shadow:none">${ic(s.icon)}</span>
-    </div>
-    <div class="stack-lg" style="direction:ltr">
-      <span class="kicker-num rv">0${i + 1} / 09</span>
-      <h2 class="h2" data-split>${s.title}</h2>
+<article class="area" id="${s.id}">
+  <div class="area__head">
+    <div><span class="num">${pad(i + 1)} / 09</span><h2 class="h2" style="margin-top:1rem;font-size:clamp(1.6rem,1.2rem + 1.5vw,2.4rem)" data-split>${s.title}</h2></div>
+    ${glyphAt(i)}
+  </div>
+  <div class="area__grid">
+    <div class="media media-hover">${img(IMG[s.id], '')}</div>
+    <div class="stack">
       <p class="lead rv">${s.desc}</p>
-      ${projs.length || posts.length ? `<div class="rv"><span class="label">Relatert</span><ul class="checks" style="margin-top:.6rem">
-        ${projs.map(p => `<li><span class="ic-box">${ic('briefcase')}</span><a class="link" href="${p.href}">${p.client}: ${p.title}</a></li>`).join('')}
-        ${posts.map(p => `<li><span class="ic-box">${ic(p.type === 'Podcast' ? 'podcast' : 'article')}</span><a class="link" href="${p.u}">${p.t}</a></li>`).join('')}
-      </ul></div>` : ''}
-      <div class="hero__actions rv" style="margin-top:.5rem">
-        <button class="btn" data-modal="m-contact" data-area="${s.title}">Snakk med en ekspert ${ic('arrow-right')}</button>
-        <a class="link" href="${B}${URL[s.id]}">Fordyp deg ${ic('arrow-up-right')}</a>
-      </div>
+      ${rel.length ? `<div class="rv" style="margin-top:1.5rem"><span class="label">Relatert</span><ul class="checks" style="margin-top:.6rem">${rel.map(([u, t, k], j) => `<li><span class="num">${pad(j + 1)}</span><a href="${u}"><span class="faint small" style="display:block;text-transform:uppercase;letter-spacing:.06em;font-size:var(--fs-xs)">${k}</span>${t}</a></li>`).join('')}</ul></div>` : ''}
+      <div class="row-actions" style="margin-top:1.75rem"><button class="btn" data-modal="m-contact" data-area="${s.title}">${PLUS} Snakk med en ekspert</button><a class="link" href="${B}${URL[s.id]}">Fordyp deg ${ic('arrow-up-right')}</a></div>
     </div>
   </div>
 </article>`;
@@ -41,42 +36,34 @@ export default {
   body: `
 ${phero({
   crumb: 'Vi jobber med', eyebrow: 'Kompetanseområder',
-  title: 'Vi jobber med det som <span class="hl">flytter</span> virksomheten din',
+  title: 'Vi jobber med det som <span class="accent">flytter</span> virksomheten din',
   lead: 'Ni fagområder som spiller hverandre gode. Vi setter sammen mennesker, verktøy og metoder i team som skaper helhetlige løsninger og resultater.',
-  actions: `<button class="btn" data-modal="m-contact">La oss snakke ${ic('arrow-right')}</button><a class="link link--accent" href="#oversikt">Se alle områder ${ic('arrow-right')}</a>`,
-  art: facts([['Kompetanseområder', '09'], ['Kontorer', '17'], ['Sektorer', 'Offentlig og privat'], ['Leveransemodell', 'Tverrfaglige team']]),
+  actions: `<button class="btn btn--lg" data-modal="m-contact">${PLUS} La oss snakke</button><a class="btn btn--line btn--lg" href="#oversikt">Se alle områder ${ARR}</a>`,
 })}
+${bleed('workshop', 'Workshop i Bouvet', 'Tverrfaglig workshop')}
 
-<section class="section--tight" id="oversikt"><div class="wrap">
-  <div class="grid g-3 svc-grid" data-stagger>
-    ${SERVICES.map((s, i) => `<a class="card svc${i === 3 ? ' is-featured' : ''}" href="#${s.id}"><span class="num">0${i + 1}</span><span class="card__icon">${ic(s.icon)}</span><h3 class="h4">${s.title}</h3><p>${s.desc}</p><span class="card__more">Gå til området ${ic('arrow-right')}</span></a>`).join('')}
+<section class="sec" id="oversikt"><div class="wrap">
+  ${head('Oversikt', 'Ni områder – velg der du vil starte')}
+  ${mosaic(SERVICES.map((s, i) => ({ t: s.title, num: pad(i + 1), href: `#${s.id}` })), { cols: 4, per: 3, tones: ['grey', 'white', 'mint', 'blue', 'grey', 'creme', 'white', 'grey', 'mint'] })}
+</div></section>
+
+<section class="sec sec--rule"><div class="wrap sidx">
+  <nav class="sidx__nav" aria-label="Kompetanseområder">
+    <span class="eyebrow" style="display:flex;margin-bottom:1.25rem">Innhold</span>
+    ${SERVICES.map((s, i) => `<a href="#${s.id}"><span class="num">${pad(i + 1)}</span>${short(s.title)}</a>`).join('')}
+  </nav>
+  <div>${SERVICES.map(area).join('')}</div>
+</div></section>
+
+<section class="sec sec--deep"><div class="wrap">
+  ${head('Slik jobber vi', 'Det som gjør at kundene gir oss fornyet tillit')}
+  <div class="steps">
+    ${[['Fag på tvers', 'Tverrfaglige team som ser helheten – fra strategi til drift.'], ['Nærhet', '17 kontorer gjør at vi forstår kundens språk, kultur og forretning.'], ['Delingskultur', 'Vi deler kunnskap åpent – i team, på scenen og i Bouvet deler.'], ['Trygt og etisk', 'Løsninger som er trygge, etiske og i tråd med regelverk.']].map(([t, d], i) => `<div class="step"><span class="num">${pad(i + 1)}</span>${glyphAt(i)}<h3 class="rv">${t}</h3><p class="rv" style="--i:1">${d}</p></div>`).join('')}
   </div>
 </div></section>
 
-<nav class="subnav" aria-label="Kompetanseområder">
-  <div class="subnav__glass"><div class="subnav__track">
-    ${SERVICES.map(s => `<a class="chip" href="#${s.id}">${ic(s.icon)}${s.title.split(' og ')[0].split(',')[0]}</a>`).join('')}
-  </div></div>
-</nav>
+<section class="sec"><div class="wrap">${slider('Prosjekter', PROJECT_SLIDES)}</div></section>
 
-${SERVICES.map(area).join('')}
-
-<section class="section section--dark"><div class="wrap">
-  ${head('Slik jobber vi', 'Det som gjør at kundene gir oss fornyet tillit', '')}
-  <div class="steps steps--4" data-stagger>
-    <div class="step">${ic('team')}<h3>Fag på tvers</h3><p>Tverrfaglige team som ser helheten – fra strategi til drift.</p></div>
-    <div class="step">${ic('pin')}<h3>Nærhet</h3><p>17 kontorer gjør at vi forstår kundens språk, kultur og forretning.</p></div>
-    <div class="step">${ic('bubble')}<h3>Delingskultur</h3><p>Vi deler kunnskap åpent – i team, på scenen og i Bouvet deler.</p></div>
-    <div class="step">${ic('security')}<h3>Trygt og etisk</h3><p>Løsninger som er trygge, etiske og i tråd med regelverk.</p></div>
-  </div>
-</div></section>
-
-<section class="section"><div class="wrap" data-hscroll>
-  ${head('Prosjekter', 'Se hva vi har skapt sammen med kundene', '', `<div class="scroll-ctrl rv"><button class="icon-btn" data-dir="-1" aria-label="Forrige">${ic('arrow-left')}</button><button class="icon-btn" data-dir="1" aria-label="Neste">${ic('arrow-right')}</button></div>`)}
-  <div class="hscroll" data-stagger>${PROJECTS.map(projectCard).join('')}</div>
-  <div class="progress"><span></span></div>
-</div></section>
-
-${contactBand()}
+${reach({ title: 'Snakk med en ekspert', text: 'Usikker på hvor dere bør starte? Beskriv utfordringen – vi kobler dere med riktig fagperson på nærmeste kontor.' })}
 `,
 };

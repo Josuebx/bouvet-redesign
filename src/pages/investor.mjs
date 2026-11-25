@@ -24,7 +24,7 @@ ${phero({
   title: 'Åpen kommunikasjon. <span class="hl">Lik</span> behandling.',
   lead: 'Bouvet kommuniserer åpent om forhold som er relevante for selskapets finansielle stilling og utvikling. Alle aksjonærer skal likebehandles, og informasjonen skal gis til rett tid, være presis og tilstrekkelig utfyllende.',
   actions: `<button class="btn" data-modal="m-ir">${ic('bell')} Abonner på børsmeldinger</button><a class="link link--accent" href="${MFN}6e878205-54a4-4001-8044-d55dea3afda6/bouvet-q3-report-2026-no-web.pdf">Kvartalsrapport Q3 2026 ${ic('download')}</a>`,
-  art: `<div class="stack" style="width:100%"><div class="ticker"><i class="pulse"></i> BOUV · Euronext Oslo Børs</div><div class="ticker">${ic('building')} ISIN NO0010360266</div><div class="ticker">${ic('coins')} Tilleggsutbytte 0,70 kr</div></div>`,
+  art: `<div class="stack" style="width:100%"><div class="ticker">BOUV · Euronext Oslo Børs</div><div class="ticker">${ic('building')} ISIN NO0010360266</div><div class="ticker">${ic('coins')} Tilleggsutbytte 0,70 kr</div></div>`,
 })}
 
 <section class="section--tight" style="padding-top:0"><div class="wrap">

@@ -1,4 +1,4 @@
-import { ic, img, head, postCard, projectCard, phero, orbit, contactBand } from '../parts.mjs';
+import { ic, img, head, postCard, projectCard, phero, orbit, facts, contactBand } from '../parts.mjs';
 import { SERVICES, PROJECTS, POSTS } from '../data.mjs';
 
 const IMG = { radgivning: 'workshop', systemutvikling: 'owasp-ctf', data: 'tverrfaglig-team', ai: 'ai-brain', arbeidsplass: 'kurs-kontor', design: 'kundeopplevelse', sky: 'proj-sikt', 'industriell-it': 'proj-dokumenter', sikkerhet: 'sikkerhet-ai-1' };
@@ -15,7 +15,7 @@ const area = (s, i) => {
   <div class="wrap split" style="${rev ? 'direction:rtl' : ''}">
     <div class="photo-wrap rv-scale" style="direction:ltr">
       <div class="photo" style="aspect-ratio:16/12">${img(IMG[s.id], '')}</div>
-      <span class="card__icon" style="position:absolute;left:1.25rem;top:1.25rem;width:64px;height:64px;border-radius:18px;background:var(--green);box-shadow:var(--sh-3)">${ic(s.icon)}</span>
+      <span class="card__icon" style="position:absolute;left:1.25rem;top:1.25rem;width:56px;height:56px;border-radius:var(--r-sm);background:var(--green);box-shadow:none">${ic(s.icon)}</span>
     </div>
     <div class="stack-lg" style="direction:ltr">
       <span class="kicker-num rv">0${i + 1} / 09</span>
@@ -44,7 +44,7 @@ ${phero({
   title: 'Vi jobber med det som <span class="hl">flytter</span> virksomheten din',
   lead: 'Ni fagområder som spiller hverandre gode. Vi setter sammen mennesker, verktøy og metoder i team som skaper helhetlige løsninger og resultater.',
   actions: `<button class="btn" data-modal="m-contact">La oss snakke ${ic('arrow-right')}</button><a class="link link--accent" href="#oversikt">Se alle områder ${ic('arrow-right')}</a>`,
-  art: orbit(SERVICES.map(s => s.icon)),
+  art: facts([['Kompetanseområder', '09'], ['Kontorer', '17'], ['Sektorer', 'Offentlig og privat'], ['Leveransemodell', 'Tverrfaglige team']]),
 })}
 
 <section class="section--tight" id="oversikt" style="padding-top:0"><div class="wrap">

@@ -40,7 +40,6 @@
   $$('[data-mnav]').forEach(b => b.addEventListener('click', () => {
     const open = !mnav.classList.contains('is-open');
     mnav.classList.toggle('is-open', open); document.body.classList.toggle('modal-open', open);
-    $$('.mnav__link', mnav).forEach((a, i) => a.style.transitionDelay = open ? `${150 + i * 50}ms` : '0ms');
     if (open) $('.mnav__close', mnav).focus();
   }));
 
@@ -79,7 +78,7 @@
     const to = parseFloat(el.dataset.count), dec = (el.dataset.count.split('.')[1] || '').length;
     const pre = el.dataset.pre || '', suf = el.dataset.suf || '';
     const fmt = v => pre + v.toLocaleString('nb-NO', { minimumFractionDigits: dec, maximumFractionDigits: dec }) + suf;
-    if (reduce) { el.textContent = fmt(to); return; }
+    el.textContent = fmt(to); return;
     const t0 = performance.now(), d = 1600;
     const tick = t => { const p = Math.min(1, (t - t0) / d), e = 1 - Math.pow(1 - p, 4); el.textContent = fmt(to * e); if (p < 1) requestAnimationFrame(tick); };
     requestAnimationFrame(tick);
@@ -92,29 +91,6 @@
   $$('.btn').forEach(b => b.addEventListener('pointerenter', e => {
     const r = b.getBoundingClientRect(); b.style.setProperty('--mx', `${e.clientX - r.left}px`); b.style.setProperty('--my', `${e.clientY - r.top}px`);
   }));
-
-  /* ---------- magnetic elements */
-  if (!reduce && matchMedia('(hover: hover)').matches) {
-    $$('[data-magnetic]').forEach(el => {
-      el.addEventListener('pointermove', e => { const r = el.getBoundingClientRect(); el.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .25}px, ${(e.clientY - r.top - r.height / 2) * .35}px)`; });
-      el.addEventListener('pointerleave', () => el.style.transform = '');
-    });
-    // hero parallax
-    const media = $('.hero__media');
-    if (media) addEventListener('pointermove', e => {
-      const x = e.clientX / innerWidth - .5, y = e.clientY / innerHeight - .5;
-      media.style.transform = `translate(${x * -14}px, ${y * -10}px)`;
-      const ring = $('.hero__ring'); if (ring) ring.style.transform = `translate(${x * 18}px, ${y * 18}px)`;
-    });
-    // cursor
-    const cur = document.createElement('div'); cur.className = 'cursor'; document.body.append(cur);
-    let cx = 0, cy = 0, tx = 0, ty = 0;
-    addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; cur.classList.add('is-on'); });
-    document.addEventListener('pointerleave', () => cur.classList.remove('is-on'));
-    const loop = () => { cx += (tx - cx) * .2; cy += (ty - cy) * .2; cur.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`; requestAnimationFrame(loop); };
-    loop();
-    document.addEventListener('pointerover', e => cur.classList.toggle('is-big', !!e.target.closest('.mcard, .svc, [data-cursor]')));
-  }
 
   /* ---------- horizontal scrollers */
   $$('[data-hscroll]').forEach(wrap => {

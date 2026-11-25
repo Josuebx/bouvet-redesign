@@ -1,4 +1,4 @@
-import { ic, img, head, postCard, row, phero, orbit, newsletterBand, BAND_WAVES } from '../parts.mjs';
+import { ic, img, head, postCard, row, phero, orbit, facts, newsletterBand, BAND_WAVES } from '../parts.mjs';
 import { POSTS, FILTERS, EVENTS } from '../data.mjs';
 
 const feat = POSTS[0];
@@ -16,7 +16,7 @@ ${phero({
   title: 'Bouvet <span class="hl">deler</span>',
   lead: 'Her deler våre folk kunnskap og historier om det vi jobber med og brenner for – fag, trender og aktuelle temaer innen teknologi, sikkerhet, design og samfunn.',
   actions: `<a class="btn" href="#artikler">Utforsk artiklene ${ic('arrow-right')}</a><a class="link link--accent" href="#podcast">${ic('podcast')} Hør podcasten</a>`,
-  art: orbit(['article', 'podcast', 'megaphone', 'bubble', 'calendar', 'newsletter']),
+  art: facts([['Innlegg', String(POSTS.length)], ['Podcastepisoder', String(POSTS.filter(p => p.type === 'Podcast').length)], ['Kommende arrangementer', String(EVENTS.length)], ['Fagområder', 'Teknologi, sikkerhet, design']]),
 })}
 
 <section class="section--tight" style="padding-top:0"><div class="wrap">

@@ -13,7 +13,7 @@ const map = () => {
     ${OFFICES.filter(o => o[0] !== 'Oslo').map(o => { const [x, y] = proj(o[2], o[3]); const mx = (x + hx) / 2 + (y - hy) * .18, my = (y + hy) / 2 - (x - hx) * .18; return `<path class="route" d="M${hx} ${hy}Q${mx.toFixed(1)} ${my.toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)}"/>`; }).join('')}
     ${OFFICES.map((o, i) => { const [x, y] = proj(o[2], o[3]); const left = o[3] > 15 || o[0] === 'Sandvika'; return `<g class="city" data-city="${slug(o[0])}" tabindex="0" aria-label="${o[0]}"><circle class="halo" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5" style="animation-delay:${(i * .19).toFixed(2)}s"/><circle class="core" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${o[0] === 'Oslo' ? 5.5 : 3.6}"/><text x="${(x + (left ? -9 : 9)).toFixed(1)}" y="${(y + 4).toFixed(1)}" text-anchor="${left ? 'end' : 'start'}">${o[0]}</text></g>`; }).join('')}
   </svg>
-  <div class="ai-art__label"><span><i class="pulse"></i> 17 kontorer</span><span>Norge · Sverige</span></div></div>`;
+  <div class="ai-art__label"><span>17 kontorer</span><span>Norge · Sverige</span></div></div>`;
 };
 
 const VALUES = [['security', 'Troverdighet'], ['bubble', 'Delingskultur'], ['spark', 'Frihet'], ['leaf', 'Jordnærhet'], ['heart', 'Entusiasme']];
@@ -28,7 +28,7 @@ ${phero({
   title: 'En ettertraktet <span class="hl">digitaliseringspartner</span>',
   lead: 'Bouvet er et ledende norsk konsulentselskap innen IT og digital kommunikasjon. Årelang erfaring, nærhet til kundene og bred kompetanse gjør oss til en partner for både private og offentlige aktører.',
   actions: `<a class="btn" href="#kontorer">${ic('pin')} Våre kontorer</a><a class="link link--accent" href="#nyheter">Siste nyheter ${ic('arrow-right')}</a>`,
-  art: `<div style="position:relative;width:100%;aspect-ratio:1"><div style="position:absolute;inset:0;border-radius:50%;overflow:hidden;border:6px solid var(--creme-light)">${img('off-oslo', 'Bouvet-huset i Oslo')}</div>${RING('Troverdighet · Deling · Frihet · Jordnærhet · Entusiasme · ')}</div>`,
+  art: `<div class="phero__photo">${img('off-oslo', 'Bouvet-huset i Oslo')}</div>`,
 })}
 
 <section class="section--tight" style="padding-top:2rem"><div class="wrap" style="text-align:center;max-width:960px">
@@ -43,7 +43,7 @@ ${phero({
 </div></section>
 
 <section class="section"><div class="wrap split">
-  <div class="photo-wrap rv-scale"><div class="photo">${img('kontor-oslo', 'Kontorlandskap i Bouvet')}</div>${SCRIBBLE()}</div>
+  <div class="photo-wrap rv-scale"><div class="photo">${img('kontor-oslo', 'Kontorlandskap i Bouvet')}</div></div>
   <div class="stack-lg">
     <div class="stack rv"><span class="card__icon">${ic('team')}</span><h3 class="h3">Fag på tvers</h3><p class="muted">Stadig flere oppdrag krever en tverrfaglig tilnærming. Vi setter sammen mennesker, verktøy og metoder i team som skaper helhetlige løsninger og resultater – en viktig grunn til at mange kunder gir oss fornyet tillit.</p></div>
     <div class="stack rv" style="--i:1"><span class="card__icon">${ic('handshake')}</span><h3 class="h3">Nærhet til kunder og kunnskap</h3><p class="muted">Nærhet til oppdragsgiverne er avgjørende for gode løsninger. Med 17 kontorer i Norge og Sverige forstår vi kundens språk, kultur og forretning, og kan forankre og løse de fleste oppdrag lokalt.</p></div>

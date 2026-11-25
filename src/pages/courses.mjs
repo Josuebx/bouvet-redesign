@@ -21,7 +21,7 @@ ${phero({
   title: 'Vi gir deg kompetanse for <span class="hl">fremtiden</span>',
   lead: 'Vår kursvirksomhet er en møteplass for mennesker som søker kunnskap og inspirasjon i arbeidet med digitalisering – med instruktører som har lang praktisk og teoretisk erfaring.',
   actions: `<button class="search-trigger" data-modal="m-search" style="background:var(--creme-light);color:var(--midnight);height:52px;padding:0 1rem;min-width:min(100%,340px);justify-content:flex-start">${ic('search')} Søk etter kurs …</button><a class="link link--accent" href="#kommende">${ic('calendar')} Kurskalender</a><a class="link link--accent" href="#pakker">${ic('layers')} Kursoversikt</a>`,
-  art: `<div style="position:relative;width:100%;aspect-ratio:1"><div style="position:absolute;inset:0;border-radius:32px;overflow:hidden;transform:rotate(4deg)">${img('kurs-deltagere', 'Kursdeltagere')}</div><div class="hero__badge" style="left:-1.5rem;bottom:1rem"><span class="dot">${ic('coffee')}</span><div><strong>Frokostseminarer</strong><span>5 byer før jul</span></div></div></div>`,
+  art: `<div class="phero__photo">${img('kurs-deltagere', 'Kursdeltagere')}</div>`,
 })}
 
 <section class="section section--alt" id="kommende"><div class="wrap">

@@ -46,17 +46,9 @@ export const phero = ({ crumb, title, lead, actions = '', art = '', eyebrow = ''
   </div>
 </div></section>`;
 
-// Orbit of icons around the Bouvet O — looping graphic for page heroes
-export const orbit = (icons, size = 280) => {
-  const n = icons.length, r = 42;
-  return `<div style="position:relative;width:100%;aspect-ratio:1">
-    <svg viewBox="0 0 100 100" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true"><circle cx="50" cy="50" r="${r}" fill="none" stroke="rgba(252,248,243,.18)" stroke-dasharray="1.5 2.5"/><circle cx="50" cy="50" r="27" fill="none" stroke="rgba(151,255,179,.25)"/></svg>
-    <div style="position:absolute;inset:0;animation:spin 40s linear infinite">
-      ${icons.map((name, i) => { const a = (i / n) * Math.PI * 2 - Math.PI / 2; const x = 50 + r * Math.cos(a), y = 50 + r * Math.sin(a); return `<span style="position:absolute;left:${x}%;top:${y}%;width:15%;aspect-ratio:1;margin:-7.5% 0 0 -7.5%;border-radius:30%;display:grid;place-items:center;background:${i % 3 === 0 ? 'var(--green)' : 'var(--midnight-3)'};color:${i % 3 === 0 ? 'var(--midnight)' : 'var(--green)'};animation:spin 40s linear infinite reverse">${ic(name)}</span>`; }).join('')}
-    </div>
-    <div style="position:absolute;inset:34%;display:grid;place-items:center;border-radius:50%;background:var(--creme-light);animation:float 6s var(--ease-in-out) infinite"><img src="/assets/bouvet-o.svg" alt="" style="width:52%"></div>
-  </div>`;
-};
+// Fact sheet — static key/value panel for page heroes
+export const facts = rows => `<dl class="facts">${rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>`;
+export const orbit = icons => `<div class="icon-matrix">${icons.map(n => `<span>${ic(n)}</span>`).join('')}</div>`;
 
 // Neural network loop (AI)
 export function aiNet() {
@@ -66,10 +58,9 @@ export function aiNet() {
   const paths = edges.map(([a, b]) => { const [x1, y1] = P(a), [x2, y2] = P(b); return `M${x1} ${y1}L${x2} ${y2}`; });
   return `<div class="ai-art rv-scale"><svg viewBox="0 0 400 400" aria-hidden="true">
     ${paths.map((d, i) => `<path id="e${i}" class="edge" d="${d}"/>`).join('')}
-    ${[0, 3, 6, 9, 12, 15, 18, 21].map((i, k) => `<circle r="3.2" class="packet"><animateMotion dur="${2.2 + (k % 4) * .6}s" begin="${k * .35}s" repeatCount="indefinite" ${k % 2 ? 'keyPoints="1;0" keyTimes="0;1" calcMode="linear"' : ''}><mpath href="#e${i}"/></animateMotion></circle>`).join('')}
-    ${nodes.map(([x, y], i) => `<circle cx="${x * 4}" cy="${y * 4}" r="${i === 0 ? 16 : i < 5 ? 7 : 5}" class="node ${i === 0 ? 'node--hot' : i % 4 === 0 ? 'node--orange' : ''}" style="animation-delay:${(i * .27).toFixed(2)}s"/>`).join('')}
+        ${nodes.map(([x, y], i) => `<circle cx="${x * 4}" cy="${y * 4}" r="${i === 0 ? 16 : i < 5 ? 7 : 5}" class="node ${i === 0 ? 'node--hot' : i % 4 === 0 ? 'node--orange' : ''}" />`).join('')}
     <image href="/assets/bouvet-o.svg" x="189" y="189" width="22" height="22"/>
-  </svg><div class="ai-art__label"><span><i class="pulse"></i> Modell i drift</span><span>Trygg · Etisk · Etterlevelse</span></div></div>`;
+  </svg><div class="ai-art__label"><span>Fig. 01 — Datadrevet beslutningsstøtte</span><span>Trygt · Etisk · Etterlevelse</span></div></div>`;
 }
 
 export const newsletterBand = () => `

@@ -10,11 +10,11 @@ export const NAV = [
   ['om-bouvet', 'Om oss'],
 ];
 
-export const WAVES = (cls = '') => `<svg class="${cls}" viewBox="0 0 640 240" aria-hidden="true"><path class="wave-a" d="M-20 182C70 182 96 92 176 86s118 98 206 88 106-128 190-136 92 34 92 34"/><path class="wave-b" d="M-20 214C82 214 106 128 188 122s116 94 204 84 104-120 186-128 82 30 82 30"/></svg>`;
-export const SCRIBBLE = (cls = '') => `<svg class="scribble ${cls}" viewBox="0 0 220 200" aria-hidden="true"><path d="M10 190c10-60 40-120 80-140 30-15 60 5 50 40s-60 50-60 20 40-70 90-75"/><path d="M30 196c8-40 30-90 70-110"/></svg>`;
-export const RING = (text = 'Vi går foran · Bygger fremtidens samfunn · ') => `<div class="hero__ring" aria-hidden="true"><svg class="ring" viewBox="0 0 124 124"><defs><path id="ringp" d="M62 62m-50 0a50 50 0 1 1 100 0a50 50 0 1 1-100 0"/></defs><circle cx="62" cy="62" r="61" fill="#fcf8f3"/><text><textPath href="#ringp">${text}</textPath></text></svg><div class="ring-core"><img src="/assets/bouvet-o.svg" alt=""></div></div>`;
-export const BAND_WAVES = (cls = '') => `<svg class="band__waves ${cls}" viewBox="0 0 420 200" aria-hidden="true"><path d="M20 10c40 30 20 80 80 90s90-40 150-10 70 90 150 100"/><path d="M60 0c40 30 20 80 80 90s90-40 150-10 70 90 150 100"/></svg>`;
-export const PHERO_LINES = `<svg class="phero__lines" viewBox="0 0 1200 400" preserveAspectRatio="none" aria-hidden="true"><path d="M-50 320C200 320 260 120 520 140s300 200 520 120 220-160 220-160"/><path d="M-50 360C220 360 300 180 560 190s320 170 520 100 200-120 200-120"/></svg>`;
+export const WAVES = () => '';
+export const SCRIBBLE = () => '';
+export const RING = () => '';
+export const BAND_WAVES = () => '';
+export const PHERO_LINES = '';
 
 const field = (id, label, input, err = 'Dette feltet må fylles ut', cls = '') =>
   `<div class="field ${cls}"><label for="${id}">${label}</label>${input}<span class="err" id="${id}-err">${ic('alert')}${err}</span></div>`;
@@ -24,7 +24,7 @@ const modal = (id, title, sub, body, success) => `
   <div class="modal__backdrop" data-close></div>
   <div class="modal__dialog">
     <button class="icon-btn modal__close" data-close aria-label="Lukk">${ic('close')}</button>
-    <div class="modal__head"><h2 class="h3" id="${id}-t">${title}</h2><p>${sub}</p><svg class="wave" viewBox="0 0 220 120" aria-hidden="true"><path d="M0 90c40 0 50-50 90-50s50 60 90 50 40-60 40-60"/><path d="M0 110c40 0 50-50 90-50s50 60 90 50 40-60 40-60"/></svg></div>
+    <div class="modal__head"><h2 class="h3" id="${id}-t">${title}</h2><p>${sub}</p></div>
     <div class="modal__body">${body}
       <div class="success" role="status"><div class="success__mark"><svg viewBox="0 0 40 40"><path d="M10 21l7 7 14-15"/></svg></div><h3 class="h3">${success[0]}</h3><p class="muted" style="margin:.75rem auto 1.5rem;max-width:26rem">${success[1]}</p><button class="btn btn--dark" data-close>Lukk</button></div>
     </div>
@@ -185,7 +185,7 @@ export function page({ slug, title, desc, body }) {
 <meta property="og:image" content="/assets/img/brand-fallback.webp">
 <link rel="icon" href="/assets/bouvet-o.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 <body data-page="${slug}">

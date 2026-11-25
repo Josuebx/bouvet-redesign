@@ -21,17 +21,16 @@ ${phero({
   title: 'Bli en av oss – og løs oppgaver som <span class="hl">betyr noe</span>',
   lead: 'I Bouvet får du jobbe med noen av Norges mest samfunnskritiske virksomheter, i et fagmiljø der vi deler kunnskap, utfordrer hverandre og skaper resultater sammen.',
   actions: `<a class="btn" href="#stillinger">Se ledige stillinger ${ic('arrow-right')}</a><button class="btn btn--ghost" data-modal="m-apply" data-title="Åpen søknad" data-meta="Alle kontorer">Send åpen søknad</button>`,
-  art: `<div style="position:relative;width:100%;aspect-ratio:1"><div style="position:absolute;inset:0;border-radius:50%;overflow:hidden;border:6px solid var(--creme-light)">${img('team-ost', 'Ansatte i Bouvet')}</div>${RING('Bli en av oss · Vi lykkes sammen · ')}</div>`,
+  art: `<div class="phero__photo">${img('team-ost', 'Ansatte i Bouvet')}</div>`,
 })}
 
 <section class="logos"><div class="wrap">
   <p class="logos__label">Vi søker</p>
-  <div class="marquee"><div class="marquee__track">${[...ROLES, ...ROLES].map(r => `<span class="marquee__item">${ic('plus')}${r}</span>`).join('')}</div></div>
-  <div class="marquee marquee--reverse" style="margin-top:1rem"><div class="marquee__track">${[...ROLES.slice().reverse(), ...ROLES.slice().reverse()].map(r => `<span class="marquee__item" style="color:var(--midnight)">${ic('check')}${r}</span>`).join('')}</div></div>
+  <ul class="clients">${ROLES.map(r => `<li>${r}</li>`).join('')}</ul>
 </div></section>
 
 <section class="section"><div class="wrap split">
-  <div class="photo-wrap rv-scale"><div class="photo">${img('office-people', 'Kollegaer i Bouvet')}</div>${SCRIBBLE()}</div>
+  <div class="photo-wrap rv-scale"><div class="photo">${img('office-people', 'Kollegaer i Bouvet')}</div></div>
   <div class="stack-lg">
     <span class="eyebrow rv">Hvorfor Bouvet</span>
     <h2 class="h2" data-split>En trygg arbeidsgiver – og et sted å <span class="hl">vokse</span></h2>

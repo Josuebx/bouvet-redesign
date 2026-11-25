@@ -8,32 +8,35 @@ export default {
   title: 'Bouvet – Vi går foran og bygger fremtidens samfunn',
   desc: 'Bouvet er et ledende norsk konsulentselskap innen IT, rådgivning, design og kommunikasjon.',
   body: `
-<section class="hero">
-  <div class="wrap hero__grid">
-    <div class="hero__panel">
-      <img class="hero__deco" src="/assets/bouvet-o-light.svg" alt="" aria-hidden="true">
-      <span class="eyebrow">IT · Rådgivning · Design · Kommunikasjon</span>
-      <h1 class="display" style="margin-top:1.25rem" data-split>Vi går foran og bygger <span class="hl">fremtidens</span> samfunn</h1>
-      <p class="lead rv" style="--i:3">Bouvet er et ledende norsk konsulentselskap. Sammen med kundene våre skaper vi digitale løsninger med stor betydning for samfunnet.</p>
-      <div class="hero__actions rv" style="--i:4">
-        <button class="btn" data-modal="m-contact" data-magnetic>La oss snakke ${ic('arrow-right')}</button>
-        <a class="link link--accent" href="#prosjekter">Se prosjektene våre ${ic('arrow-right')}</a>
+<section class="hero"><div class="wrap">
+  <div class="hx">
+    <div class="hx__grid">
+      <div class="hx__copy">
+        <span class="eyebrow">Bouvet ASA — Euronext Oslo Børs: BOUV</span>
+        <h1 class="display" data-split>Vi går foran og bygger <span class="hl">fremtidens</span> samfunn</h1>
+        <p class="lead rv" style="--i:3">Et ledende norsk konsulentselskap innen IT, rådgivning, design og kommunikasjon. Vi leverer virksomhetskritiske løsninger til offentlig sektor og næringsliv.</p>
+        <div class="hero__actions rv" style="--i:4">
+          <button class="btn" data-modal="m-contact">Ta kontakt ${ic('arrow-right')}</button>
+          <a class="btn btn--ghost" href="#prosjekter">Se referanseprosjekter</a>
+        </div>
+      </div>
+      <div class="hx__media rv" style="--i:2">
+        ${img('kurs-samtale', 'Bouvet-konsulenter i samtale', 'fetchpriority="high" loading="eager"')}
+        <div class="hx__card"><span class="mono">Utvalgte oppdragsgivere</span><b>NATO JWC · Sokkeldirektoratet · Sikt · Miljødirektoratet</b><a class="link link--accent" href="/om-bouvet#nyheter">Les om avtalene ${ic('arrow-right')}</a></div>
       </div>
     </div>
-    <div class="hero__media">
-      <div class="hero__img">${img('kurs-samtale', 'Bouvet-konsulenter i samtale', 'fetchpriority="high" loading="eager"')}</div>
-      ${WAVES('hero__waves')}
-      ${RING()}
-      <div class="hero__badge"><span class="dot">${ic('trend')}</span><div><strong>Notert på Oslo Børs</strong><span><i class="pulse" style="margin-right:.4rem"></i>Ticker BOUV</span></div></div>
+    <div class="hx__stats">
+      <div class="rv">${ic('office')}<b>17</b><span>Kontorer i Norge og Sverige</span></div>
+      <div class="rv" style="--i:1">${ic('layers')}<b>9</b><span>Kompetanseområder</span></div>
+      <div class="rv" style="--i:2">${ic('trend')}<b>865,4</b><span>MNOK driftsinntekter Q3 2026</span></div>
+      <div class="rv" style="--i:3">${ic('certificate')}<b>20+</b><span>År som verdidrevet selskap</span></div>
     </div>
   </div>
-</section>
+</div></section>
 
 <section class="logos"><div class="wrap">
-  <p class="logos__label">Vi skaper løsninger sammen med blant andre</p>
-  <div class="marquee"><div class="marquee__track">
-    ${[...CLIENTS, ...CLIENTS].map(c => `<span class="marquee__item">${ic('spark')}${c}</span>`).join('')}
-  </div></div>
+  <p class="logos__label">Utvalgte oppdragsgivere</p>
+  <ul class="clients">${CLIENTS.map(c => `<li>${c}</li>`).join('')}</ul>
 </div></section>
 
 <section class="section section--alt" id="tjenester"><div class="wrap">
@@ -62,7 +65,7 @@ export default {
 <section class="section section--alt"><div class="wrap split">
   <div class="photo-wrap rv-scale">
     <div class="photo">${img('office-people', 'Kollegaer i Bouvet-huset i Oslo')}</div>
-    ${SCRIBBLE()}
+    
   </div>
   <div class="stack-lg">
     <span class="eyebrow rv">Om Bouvet</span>
@@ -78,16 +81,7 @@ export default {
   </div>
 </div></section>
 
-<section class="section section--tight"><div class="wrap">
-  <div class="stats rv">
-    <div class="stat"><b data-count="17">0</b><span>kontorer i Norge og Sverige</span></div>
-    <div class="stat"><b data-count="9">0</b><span>kompetanseområder</span></div>
-    <div class="stat"><b><span data-count="865.4">0</span><small>MNOK</small></b><span>driftsinntekter i 3. kvartal 2026</span></div>
-    <div class="stat"><b data-count="20" data-pre="&gt; " data-suf=" år">0</b><span>som verdidrevet konsulentselskap</span></div>
-  </div>
-</div></section>
-
-<section class="section" id="prosjekter" style="padding-top:0"><div class="wrap" data-hscroll>
+<section class="section" id="prosjekter"><div class="wrap" data-hscroll>
   ${head('Våre prosjekter', 'Løsninger med stor betydning for samfunnet', '', `<div class="scroll-ctrl rv"><button class="icon-btn" data-dir="-1" aria-label="Forrige">${ic('arrow-left')}</button><button class="icon-btn" data-dir="1" aria-label="Neste">${ic('arrow-right')}</button></div>`)}
   <div class="hscroll" data-stagger>${PROJECTS.map(projectCard).join('')}</div>
   <div class="progress"><span></span></div>

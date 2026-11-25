@@ -9,28 +9,35 @@ export default {
   desc: 'Bouvet er et ledende norsk konsulentselskap innen IT, rådgivning, design og kommunikasjon.',
   body: `
 <section class="hero"><div class="wrap">
-  <div class="hx">
-    <div class="hx__grid">
-      <div class="hx__copy">
-        <span class="eyebrow">Bouvet ASA — Euronext Oslo Børs: BOUV</span>
-        <h1 class="display" data-split>Vi går foran og bygger <span class="hl">fremtidens</span> samfunn</h1>
-        <p class="lead rv" style="--i:3">Et ledende norsk konsulentselskap innen IT, rådgivning, design og kommunikasjon. Vi leverer virksomhetskritiske løsninger til offentlig sektor og næringsliv.</p>
-        <div class="hero__actions rv" style="--i:4">
-          <button class="btn" data-modal="m-contact">Ta kontakt ${ic('arrow-right')}</button>
-          <a class="btn btn--ghost" href="#prosjekter">Se referanseprosjekter</a>
-        </div>
-      </div>
-      <div class="hx__media rv" style="--i:2">
-        ${img('kurs-samtale', 'Bouvet-konsulenter i samtale', 'fetchpriority="high" loading="eager"')}
-        <div class="hx__card"><span class="mono">Utvalgte oppdragsgivere</span><b>NATO JWC · Sokkeldirektoratet · Sikt · Miljødirektoratet</b><a class="link link--accent" href="/om-bouvet#nyheter">Les om avtalene ${ic('arrow-right')}</a></div>
-      </div>
+  <div class="hero__top">
+    <div>
+      <span class="eyebrow">Bouvet ASA — Euronext Oslo Børs: BOUV</span>
+      <h1 class="display" data-split>Vi går foran og bygger <span class="hl">fremtidens</span> samfunn</h1>
     </div>
-    <div class="hx__stats">
-      <div class="rv">${ic('office')}<b>17</b><span>Kontorer i Norge og Sverige</span></div>
-      <div class="rv" style="--i:1">${ic('layers')}<b>9</b><span>Kompetanseområder</span></div>
-      <div class="rv" style="--i:2">${ic('trend')}<b>865,4</b><span>MNOK driftsinntekter Q3 2026</span></div>
-      <div class="rv" style="--i:3">${ic('certificate')}<b>20+</b><span>År som verdidrevet selskap</span></div>
+    <div class="hero__aside">
+      <div class="hero__actions rv" style="--i:3">
+        <button class="btn" data-modal="m-contact">Ta kontakt ${ic('arrow-right')}</button>
+        <a class="btn btn--ghost" href="#prosjekter">Referanseprosjekter</a>
+      </div>
+      <p class="rv muted" style="--i:4">IT, rådgivning, design og kommunikasjon for virksomhetskritiske behov – i offentlig sektor og næringsliv.</p>
     </div>
+  </div>
+  <div class="hero__wide rv" style="--i:2">
+    ${img('office-people', 'Kollegaer i Bouvet-huset i Oslo', 'fetchpriority="high" loading="eager"')}
+    <div class="hx__card"><span class="mono">Utvalgte oppdragsgivere</span><b>NATO JWC · Sokkeldirektoratet · Sikt · Miljødirektoratet</b><a class="link link--accent" href="/om-bouvet#nyheter">Les om avtalene ${ic('arrow-right')}</a></div>
+  </div>
+</div></section>
+
+<section class="statement"><div class="wrap">
+  <div class="statement__grid">
+    <span class="eyebrow rv">Om Bouvet</span>
+    <p class="statement__text" data-split>Et ledende norsk konsulentselskap innen IT og digital kommunikasjon, <span class="soft">og en ettertraktet partner for private og offentlige virksomheter som trenger løsninger som virker.</span></p>
+  </div>
+  <div class="figures">
+    <div class="rv"><b>17</b><span>Kontorer i Norge og Sverige, nær kundene</span></div>
+    <div class="rv" style="--i:1"><b>9</b><span>Kompetanseområder i tverrfaglige team</span></div>
+    <div class="rv" style="--i:2"><b>865,4</b><span>MNOK i driftsinntekter, tredje kvartal 2026</span></div>
+    <div class="rv" style="--i:3"><b>20+</b><span>År som verdidrevet konsulentselskap</span></div>
   </div>
 </div></section>
 
@@ -64,7 +71,7 @@ export default {
 
 <section class="section section--alt"><div class="wrap split">
   <div class="photo-wrap rv-scale">
-    <div class="photo">${img('office-people', 'Kollegaer i Bouvet-huset i Oslo')}</div>
+    <div class="photo">${img('kontor-oslo', 'Kontorlandskap i Bouvet')}</div>
     
   </div>
   <div class="stack-lg">

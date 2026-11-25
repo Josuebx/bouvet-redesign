@@ -47,7 +47,7 @@ ${phero({
   art: facts([['Kompetanseområder', '09'], ['Kontorer', '17'], ['Sektorer', 'Offentlig og privat'], ['Leveransemodell', 'Tverrfaglige team']]),
 })}
 
-<section class="section--tight" id="oversikt" style="padding-top:0"><div class="wrap">
+<section class="section--tight" id="oversikt"><div class="wrap">
   <div class="grid g-3 svc-grid" data-stagger>
     ${SERVICES.map((s, i) => `<a class="card svc${i === 3 ? ' is-featured' : ''}" href="#${s.id}"><span class="num">0${i + 1}</span><span class="card__icon">${ic(s.icon)}</span><h3 class="h4">${s.title}</h3><p>${s.desc}</p><span class="card__more">Gå til området ${ic('arrow-right')}</span></a>`).join('')}
   </div>

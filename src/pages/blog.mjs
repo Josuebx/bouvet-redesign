@@ -19,7 +19,7 @@ ${phero({
   art: facts([['Innlegg', String(POSTS.length)], ['Podcastepisoder', String(POSTS.filter(p => p.type === 'Podcast').length)], ['Kommende arrangementer', String(EVENTS.length)], ['Fagområder', 'Teknologi, sikkerhet, design']]),
 })}
 
-<section class="section--tight" style="padding-top:0"><div class="wrap">
+<section class="section--tight"><div class="wrap">
   <a class="feature-post mcard rv" href="${feat.u}">
     <div class="mcard__img">${img(feat.img, '')}<span class="mcard__go">${ic('arrow-up-right')}</span></div>
     <div class="stack-lg">
@@ -31,7 +31,7 @@ ${phero({
   </a>
 </div></section>
 
-<section class="section" id="artikler" style="padding-top:2rem"><div class="wrap">
+<section class="section" id="artikler"><div class="wrap">
   <div class="head" style="margin-bottom:2rem"><div><span class="eyebrow">Siste fra Bouvet deler</span><h2 class="h2" style="margin-top:.9rem">Filtrer etter tema</h2></div></div>
   <div class="chips rv" data-filter-group="#post-grid" role="group" aria-label="Filtrer artikler" style="margin-bottom:2.5rem">
     ${FILTERS.map(([f, l], i) => `<button class="chip" data-filter="${f}" aria-pressed="${i === 0}">${l} <span class="count">${count(f)}</span></button>`).join('')}

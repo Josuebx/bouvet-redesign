@@ -20,7 +20,7 @@ ${phero({
   crumb: 'Kurs', eyebrow: 'Bouvet Kurs',
   title: 'Vi gir deg kompetanse for <span class="hl">fremtiden</span>',
   lead: 'Vår kursvirksomhet er en møteplass for mennesker som søker kunnskap og inspirasjon i arbeidet med digitalisering – med instruktører som har lang praktisk og teoretisk erfaring.',
-  actions: `<button class="search-trigger" data-modal="m-search" style="background:var(--creme-light);color:var(--midnight);height:52px;padding:0 1rem;min-width:min(100%,340px);justify-content:flex-start">${ic('search')} Søk etter kurs …</button><a class="link link--accent" href="#kommende">${ic('calendar')} Kurskalender</a><a class="link link--accent" href="#pakker">${ic('layers')} Kursoversikt</a>`,
+  actions: `<button class="search-trigger" data-modal="m-search" style="height:48px;padding:0 1rem;min-width:min(100%,300px);justify-content:flex-start;background:var(--white)">${ic('search')} Søk etter kurs …</button><a class="link link--accent" href="#kommende">${ic('calendar')} Kurskalender</a><a class="link link--accent" href="#pakker">${ic('layers')} Kursoversikt</a>`,
   art: `<div class="phero__photo">${img('kurs-deltagere', 'Kursdeltagere')}</div>`,
 })}
 

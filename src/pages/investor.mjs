@@ -27,7 +27,7 @@ ${phero({
   art: `<div class="stack" style="width:100%"><div class="ticker">BOUV · Euronext Oslo Børs</div><div class="ticker">${ic('building')} ISIN NO0010360266</div><div class="ticker">${ic('coins')} Tilleggsutbytte 0,70 kr</div></div>`,
 })}
 
-<section class="section--tight" style="padding-top:0"><div class="wrap">
+<section class="section--tight"><div class="wrap">
   <div class="stats rv">
     <div class="stat"><b data-count="865.4">0</b><span>Driftsinntekter Q3 2026 (MNOK)</span></div>
     <div class="stat"><b data-count="80.5">0</b><span>Driftsresultat (EBIT) Q3 2026 (MNOK)</span></div>
@@ -36,7 +36,7 @@ ${phero({
   </div>
 </div></section>
 
-<section class="section" style="padding-top:2rem"><div class="wrap">
+<section class="section"><div class="wrap">
   <div class="tabs rv" role="tablist" aria-label="Investorinformasjon">
     <button class="tab" role="tab" id="t-1" aria-controls="p-1" aria-selected="true">${ic('trend')} Nøkkeltall</button>
     <button class="tab" role="tab" id="t-2" aria-controls="p-2" aria-selected="false">${ic('building')} Aksje</button>

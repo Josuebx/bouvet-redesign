@@ -31,7 +31,7 @@ ${phero({
   art: `<div class="phero__photo">${img('off-oslo', 'Bouvet-huset i Oslo')}</div>`,
 })}
 
-<section class="section--tight" style="padding-top:2rem"><div class="wrap" style="text-align:center;max-width:960px">
+<section class="section--tight"><div class="wrap" style="text-align:center;max-width:960px">
   <span class="eyebrow rv">Vår visjon</span>
   <p class="display" style="margin-top:1.25rem;font-size:clamp(2rem,1.2rem+3.4vw,4rem)" data-split>«Vi går foran og bygger <span class="hl">fremtidens</span> samfunn.»</p>
   <p class="lead rv" style="margin:1.5rem auto 0;max-width:40rem">Vår ambisjon er å være det mest troverdige konsulentselskapet med de mest fornøyde medarbeiderne og kundene.</p>

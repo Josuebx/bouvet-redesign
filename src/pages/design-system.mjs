@@ -34,10 +34,10 @@ ${phero({
   crumb: 'Design system', eyebrow: 'Bouvet DS · v1.0',
   title: 'Ett system. <span class="hl">Alle</span> flater.',
   lead: 'Byggeklossene bak bouvet.no – bygget på Bouvets egen palett og Inter. Klikk på en farge eller et ikon for å kopiere.',
-  art: facts([['Versjon', '2.0'], ['Ikoner', '66'], ['Typografi', 'Inter · IBM Plex Mono'], ['Bevegelse', 'Kun inngang']]),
+  art: facts([['Versjon', '3.0'], ['Ikoner', '66'], ['Typografi', 'Inter · IBM Plex Mono'], ['Bevegelse', 'Kun inngang']]),
 })}
 
-<section class="section" style="padding-top:2rem"><div class="wrap ds-layout">
+<section class="section"><div class="wrap ds-layout">
   <nav class="ds-nav" aria-label="Design system">
     ${['prinsipper:Prinsipper', 'farger:Farger', 'typografi:Typografi', 'rom:Rom og form', 'ikoner:Ikoner', 'knapper:Knapper og lenker', 'skjema:Skjema', 'kort:Kort og lister', 'bevegelse:Bevegelse', 'popup:Popup'].map(s => { const [h, l] = s.split(':'); return `<a href="#${h}">${l}</a>`; }).join('')}
   </nav>
@@ -54,9 +54,9 @@ ${phero({
       ${TYPE.map(([n, spec, ex]) => `<div class="type-row"><div><b>${n}</b><br><code>${spec}</code></div><div>${ex}</div></div>`).join('')}
     </section>
 
-    <section class="ds-sec" id="rom"><h2 class="h3">Rom og form</h2><p>4-punkts grid, generøs seksjonsluft og stramme radier. Hårfine linjer strukturerer innholdet; skygger brukes knapt.</p>
+    <section class="ds-sec" id="rom"><h2 class="h3">Rom og form</h2><p>4-punkts grid, generøs seksjonsluft og rette hjørner overalt. Seksjoner er kvadratiske paneler stablet på en nøytral ramme med 10 px mellomrom. Hårfine linjer strukturerer innholdet.</p>
       <table class="token-table"><thead><tr><th>Token</th><th>Verdi</th><th>Bruk</th></tr></thead><tbody>
-        ${[['--s-2', '8px', 'Ikon ↔ tekst'], ['--s-4', '16px', 'Skjemafelt, kort-innhold'], ['--s-6', '32px', 'Kort-padding'], ['--s-8', '64px', 'Blokker'], ['--section', '72–128px', 'Seksjonsavstand'], ['--r-sm', '4px', 'Knapper, felt'], ['--r-lg', '8px', 'Kort, bilder'], ['--r-xl', '12px', 'Hero, bånd, popup'], ['--sh-1', 'subtil', 'Kort i hvile'], ['--sh-3', 'dyp', 'Hover-løft, popup']].map(r => `<tr><td><code>${r[0]}</code></td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('')}
+        ${[['--s-2', '8px', 'Ikon ↔ tekst'], ['--s-4', '16px', 'Skjemafelt, kort-innhold'], ['--s-6', '32px', 'Kort-padding'], ['--s-8', '64px', 'Blokker'], ['--section', '72–128px', 'Seksjonsavstand'], ['--r-*', '0', 'Alle flater – rette hjørner'], ['--sh-1', 'subtil', 'Kort i hvile'], ['--sh-3', 'dyp', 'Hover-løft, popup']].map(r => `<tr><td><code>${r[0]}</code></td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('')}
       </tbody></table>
       <div class="demo" style="margin-top:1.5rem">${['--r-sm', '--r-md', '--r-lg', '--r-xl', '--r-pill'].map(r => `<div style="width:88px;height:64px;background:var(--midnight);border-radius:var(${r});display:grid;place-items:center;color:var(--green);font-size:.7rem;font-weight:600">${r}</div>`).join('')}</div>
     </section>

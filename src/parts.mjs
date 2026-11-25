@@ -6,7 +6,7 @@ export const img = (name, alt = '', extra = '') => `<img src="/assets/img/${name
 const initials = n => n.split(' ').filter(Boolean).map(w => w[0]).slice(0, 2).join('');
 
 export const head = (eyebrow, title, lead = '', right = '') => `
-<div class="head"><div><span class="eyebrow rv">${eyebrow}</span><h2 class="h2 rv" style="margin-top:.9rem" data-split>${title}</h2>${lead ? `<p class="lead rv" style="--i:1">${lead}</p>` : ''}</div>${right}</div>`;
+<div class="head${lead || right ? '' : ' head--solo'}"><div><span class="eyebrow rv">${eyebrow}</span><h2 class="h2 rv" style="margin-top:.9rem" data-split>${title}</h2></div>${lead || right ? `<div class="head__aside">${lead ? `<p class="lead rv" style="--i:1">${lead}</p>` : ''}${right}</div>` : ''}</div>`;
 
 export const postCard = (p, extra = '') => `
 <a class="mcard" href="${p.u}" data-tags="${p.tags || ''}" ${extra}>
@@ -33,17 +33,12 @@ export const row = (e, modal = 'm-event', icon = 'pin') => `
 
 export const phero = ({ crumb, title, lead, actions = '', art = '', eyebrow = '' }) => `
 <section class="phero"><div class="wrap">
-  <div class="phero__box on-dark">
-    ${PHERO_LINES}
-    <div style="position:relative">
-      <nav class="phero__crumb" aria-label="Brødsmuler"><a href="/">Forside</a>${ic('arrow-right')}<span aria-current="page">${crumb}</span></nav>
-      ${eyebrow ? `<span class="eyebrow">${eyebrow}</span>` : ''}
-      <h1 class="h1" style="margin-top:.75rem" data-split>${title}</h1>
-      <p class="lead rv" style="--i:2">${lead}</p>
-      ${actions ? `<div class="hero__actions rv" style="--i:3">${actions}</div>` : ''}
-    </div>
-    <div class="phero__art rv-scale">${art}</div>
+  <nav class="phero__crumb" aria-label="Brødsmuler"><a href="/">Forside</a>${ic('arrow-right')}<span aria-current="page">${crumb}</span></nav>
+  <div class="phero__top">
+    <div>${eyebrow ? `<span class="eyebrow">${eyebrow}</span>` : ''}<h1 class="h1" data-split>${title}</h1></div>
+    <div class="phero__aside"><p class="lead rv" style="--i:2">${lead}</p>${actions ? `<div class="hero__actions rv" style="--i:3">${actions}</div>` : ''}</div>
   </div>
+  ${art ? `<div class="phero__art rv" style="--i:3">${art}</div>` : ''}
 </div></section>`;
 
 // Fact sheet — static key/value panel for page heroes
